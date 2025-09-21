@@ -8,9 +8,7 @@ function Layout() {
         <Navbar.Mobile />
         <Navbar.Desktop />
       </header>
-      <main className="pt-20 lg:pt-0">
-        <Outlet />
-      </main>
+      <Outlet />
       <footer></footer>
     </div>
   );
