@@ -13,6 +13,15 @@ const InputText = ({ defaultValue, name, title, register }: InputT) => {
   );
 };
 
+const InputNumber = ({ defaultValue, name, title, register }: InputT) => {
+  return (
+    <div className="flex flex-col gap-3">
+      <Label htmlFor={name}>{title}</Label>
+      <Input {...register(name)} defaultValue={defaultValue ?? 0} />
+    </div>
+  );
+};
+
 const InputPassword = ({ defaultValue, name, title, register }: InputT) => {
   return (
     <div className="grid gap-3">
@@ -29,4 +38,5 @@ const InputPassword = ({ defaultValue, name, title, register }: InputT) => {
 export const Form = {
   InputText,
   InputPassword,
+  InputNumber,
 };

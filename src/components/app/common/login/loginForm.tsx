@@ -17,7 +17,6 @@ function LoginForm() {
   });
 
   const onSubmit = (data: LoginUserT) => {
-    console.log("Data: " + JSON.stringify(data));
     reset();
   };
 
