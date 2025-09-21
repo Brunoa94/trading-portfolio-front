@@ -5,15 +5,18 @@ interface Props {
 }
 
 function VariationBanner({ value }: Props) {
+  const isPositive = value > 0;
   return (
     <div
       className={clsx(
-        "flex h-6 items-center justify-center rounded-sm px-2",
-        value > 0 ? "bg-green-500" : "bg-red-500"
+        "flex h-6 items-center justify-center rounded-md px-2 font-mono text-xs font-semibold",
+        isPositive
+          ? "bg-gradient-to-r from-emerald-500 to-emerald-400 text-white"
+          : "bg-gradient-to-r from-red-500 to-red-400 text-white"
       )}
     >
-      <span className={clsx("text-primary text-xs")}>
-        {value > 0 ? `+${value}%` : `-${value}%`}
+      <span>
+        {isPositive ? `+${value}%` : `${value}%`}
       </span>
     </div>
   );

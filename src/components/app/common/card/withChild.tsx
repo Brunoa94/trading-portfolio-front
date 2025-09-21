@@ -15,7 +15,7 @@ function WithChildCard({ title, children }: Props) {
       }}
     >
       <CardHeader>
-        <CardTitle className="text-md">{title}</CardTitle>
+        <CardTitle className="text-md text-primary!">{title}</CardTitle>
       </CardHeader>
       <CardContent>{children}</CardContent>
     </Card>
