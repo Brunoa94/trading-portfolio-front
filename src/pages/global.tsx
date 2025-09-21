@@ -1,3 +1,4 @@
+import { TableDemo } from "@/components/app/common/transaction/transactionList";
 import StatisticsOverview from "@/components/app/global/statisticsOverview";
 import Container from "@/components/app/layout/container";
 
@@ -6,6 +7,7 @@ function GlobalPage() {
     <main className="flex w-full justify-center">
       <Container>
         <StatisticsOverview />
+        <TableDemo />
       </Container>
     </main>
   );

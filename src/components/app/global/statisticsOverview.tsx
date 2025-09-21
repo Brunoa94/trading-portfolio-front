@@ -11,8 +11,6 @@ function StatisticsOverview() {
       <WithChildCard title="Variation">
         <Percentage percentage={23.2} />
       </WithChildCard>
-      <WithChildCard title="Revenue"></WithChildCard>
-      <WithChildCard title="Revenue"></WithChildCard>
     </div>
   );
 }
