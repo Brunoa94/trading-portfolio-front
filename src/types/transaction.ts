@@ -8,4 +8,4 @@ export type TransactionI = {
   price_bought: number;
 };
 
-export type CreateTransationT = Omit<TransactionI, "id">;
+export type CreateTransactionT = Omit<TransactionI, "id">;
