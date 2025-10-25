@@ -1,5 +1,3 @@
-"use server";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { InputT } from "@/types/input";
@@ -17,7 +15,11 @@ const InputNumber = ({ defaultValue, name, title, register }: InputT) => {
   return (
     <div className="flex flex-col gap-3">
       <Label htmlFor={name}>{title}</Label>
-      <Input {...register(name)} defaultValue={defaultValue ?? 0} />
+      <Input
+        {...register(name, { valueAsNumber: true })}
+        type="number"
+        defaultValue={defaultValue ?? 0}
+      />
     </div>
   );
 };

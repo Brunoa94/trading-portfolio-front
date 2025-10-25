@@ -1,5 +1,6 @@
-import type { CreateTransactionT, TransactionI } from "@/types/transaction";
+import type { TransactionI } from "@/types/transaction";
 import { DELETE, GET, PATCH, POST } from "./apiClient";
+import type { CreateTransactionT } from "@/schemas/transaction";
 
 export class TransactionService {
   static async getTransactions() {

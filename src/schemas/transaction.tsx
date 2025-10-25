@@ -3,7 +3,7 @@ import z from "zod";
 export const CreateTransactionSchema = z.object({
   description: z.string().optional(),
   amount: z.number(),
-  asset: z.string(),
+  asset_type: z.string(),
   price_bought: z.number(),
 });
 

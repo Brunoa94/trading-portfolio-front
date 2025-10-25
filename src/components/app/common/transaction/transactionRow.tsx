@@ -12,7 +12,7 @@ function TransactionRow({ row }: Props) {
       <TableCell>{row.description || ""}</TableCell>
       <TableCell>{row.amount}</TableCell>
       <TableCell>{row.price_bought}€</TableCell>
-      <TableCell>{row.asset.symbol}</TableCell>
+      <TableCell>{String(row.asset_type)}</TableCell>
     </>
   );
 }

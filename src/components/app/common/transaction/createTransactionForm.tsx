@@ -8,48 +8,57 @@ import { Form } from "../input/form";
 import type { Asset } from "@/types/transaction";
 import { Combobox } from "../input/combobox";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { SheetClose, SheetFooter } from "@/components/ui/sheet";
-
-type AssetSelect = {
-  value: Asset;
-  label: string;
-};
-
-const frameworks: AssetSelect[] = [
-  {
-    value: "crypto",
-    label: "Crypto Coin",
-  },
-  {
-    value: "stock",
-    label: "Funds Stocks",
-  },
-  {
-    value: "commodity",
-    label: "Pension",
-  },
-  {
-    value: "currency",
-    label: "Currency",
-  },
-];
+import { TransactionService } from "@/services/transactionService";
 
 interface Props {
   withFooter?: boolean;
 }
 
 function CreateTransactionForm({ withFooter }: Props) {
-  const { register, handleSubmit, reset } = useForm({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm<CreateTransactionT>({
     resolver: zodResolver(CreateTransactionSchema),
   });
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (body: CreateTransactionT) => {
+      console.log("Mutation executing with body:", body);
+      return TransactionService.createTransaction(body);
+    },
+    onSuccess: (data) => {
+      console.log("Mutation success:", data);
+      queryClient.invalidateQueries({ queryKey: ["tradings"] });
+      reset();
+    },
+    onError: (error) => {
+      console.error("Mutation error:", error);
+    },
+    onMutate: (variables) => {
+      console.log("Mutation starting with variables:", variables);
+    },
+  });
 
-  const onSubmit = (e: CreateTransactionT) => {
-    console.log("JSON " + JSON.stringify(e));
+  const onSubmit = (body: CreateTransactionT) => {
+    console.log("Form submitted:", body);
+    mutation.mutate(body);
+  };
+
+  const onError = (errors: any) => {
+    console.log("Form validation errors:", errors);
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="flex flex-col gap-4"
+      onSubmit={handleSubmit(onSubmit, onError)}
+    >
       <Form.InputText
         name="description"
         title="Description"
@@ -64,14 +73,25 @@ function CreateTransactionForm({ withFooter }: Props) {
       <Button variant="secondary" className="ml-auto w-fit px-2">
         Get Current Price
       </Button>
-      <Combobox name="asset" register={register} />
-      {withFooter && (
+      <Combobox name="asset_type" setValue={setValue} />
+      {errors.asset_type && (
+        <span className="text-sm text-red-500">Asset is required</span>
+      )}
+      {errors.amount && (
+        <span className="text-sm text-red-500">Amount is required</span>
+      )}
+      {errors.price_bought && (
+        <span className="text-sm text-red-500">Price is required</span>
+      )}
+      {withFooter ? (
         <SheetFooter className="mt-auto px-0">
           <Button type="submit">Save Transaction</Button>
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>
         </SheetFooter>
+      ) : (
+        <Button type="submit">Save Transaction</Button>
       )}
     </form>
   );
