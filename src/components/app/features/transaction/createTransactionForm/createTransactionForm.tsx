@@ -1,63 +1,77 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { Form } from "../../input/form";
-import { Combobox } from "../../input/combobox";
+import { Combobox, type ComboOptionT } from "../../input/combobox";
 import { Button } from "@/components/ui/button";
+import type { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import type { AssetTypeT } from "@/types/asset";
 
 import { SheetClose, SheetFooter } from "@/components/ui/sheet";
 import { CreateTransactionErrors } from "./createTransactionErrors";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { TransactionService } from "@/services/transactionService";
-import { CreateTransactionSchema, type CreateTransactionT } from "./schemas";
+import useCreateTransaction from "./useCreateTransaction";
+import AssetsCombobox from "@/components/app/common/assetsCombobox";
 
 interface Props {
   withFooter?: boolean;
 }
 
-function CreateTransactionForm({ withFooter }: Props) {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm<CreateTransactionT>({
-    resolver: zodResolver(CreateTransactionSchema),
-  });
+const ASSETS_OPTIONS: ComboOptionT[] = [
+  {
+    value: "CRYPTO",
+    label: "Crypto Coin",
+  },
+  {
+    value: "STOCK",
+    label: "Funds Stocks",
+  },
+];
 
-  const queryClient = useQueryClient();
+function useAssetTypeSelection() {
+  const [selectedAssetType, setSelectedAssetType] =
+    useState<AssetTypeT>("STOCK");
+  return { selectedAssetType, setSelectedAssetType };
+}
 
-  const { mutateAsync, data, isPending } = useMutation({
-    mutationFn: (body: CreateTransactionT) => {
-      return TransactionService.createTransaction(body);
-    },
-    onSuccess: (data) => {
-      console.log("Mutation success:", data);
-      queryClient.invalidateQueries({ queryKey: ["tradings"] });
-    },
-    onError: (error) => {
-      console.error("Mutation error:", error);
-    },
-    onMutate: (variables) => {
-      console.log("Mutation starting with variables:", variables);
-    },
-  });
+interface TransactionFormFieldsProps {
+  register: UseFormRegister<any>;
+  setValue: UseFormSetValue<any>;
+  selectedAssetType: AssetTypeT;
+  onAssetTypeChange: (assetType: AssetTypeT) => void;
+}
 
-  const onSubmit = async (body: CreateTransactionT) => {
-    console.log("Form submitted:", body);
-    await mutateAsync(body);
-  };
-
-  const onError = (errors: any) => {
-    console.log("Form validation errors:", errors);
+function TransactionFormFields({
+  register,
+  setValue,
+  selectedAssetType,
+  onAssetTypeChange,
+}: TransactionFormFieldsProps) {
+  const handleAssetTypeChange = (value: string) => {
+    setValue("asset_type", value);
+    onAssetTypeChange(value as AssetTypeT);
   };
 
   return (
-    <form
-      className="flex flex-col gap-4"
-      onSubmit={handleSubmit(onSubmit, onError)}
-    >
+    <>
       <Form.InputText name="title" title="Title" register={register} />
+      <Combobox
+        name="asset_type"
+        setValue={(_, value) => handleAssetTypeChange(value)}
+        options={ASSETS_OPTIONS}
+      />
+      <AssetsCombobox assetType={selectedAssetType} setValue={setValue} />
       <Form.InputNumber name="amount" title="Amount" register={register} />
+      <PriceSection register={register} />
+      <Form.InputNumber name="user_id" title="User Id" register={register} />
+    </>
+  );
+}
+
+interface PriceSectionProps {
+  register: UseFormRegister<any>;
+}
+
+function PriceSection({ register }: PriceSectionProps) {
+  return (
+    <div className="space-y-2">
       <Form.InputNumber
         name="price_targeted"
         title="Price Targeted"
@@ -66,20 +80,47 @@ function CreateTransactionForm({ withFooter }: Props) {
       <Button variant="secondary" className="ml-auto w-fit px-2">
         Get Current Price
       </Button>
-      <Combobox name="asset_type" setValue={setValue} />
-      <Form.InputNumber name="user_id" title="User Id" register={register} />
-      <Form.InputText name="symbol" title="Symbol" register={register} />
+    </div>
+  );
+}
+
+interface FormFooterProps {
+  withFooter?: boolean;
+}
+
+function FormFooter({ withFooter }: FormFooterProps) {
+  const submitButton = <Button type="submit">Save Transaction</Button>;
+
+  return withFooter ? (
+    <SheetFooter className="mt-auto px-0">
+      {submitButton}
+      <SheetClose asChild>
+        <Button variant="outline">Close</Button>
+      </SheetClose>
+    </SheetFooter>
+  ) : (
+    submitButton
+  );
+}
+
+function CreateTransactionForm({ withFooter }: Props) {
+  const { handleSubmit, onSubmit, onError, register, setValue, errors } =
+    useCreateTransaction();
+  const { selectedAssetType, setSelectedAssetType } = useAssetTypeSelection();
+
+  return (
+    <form
+      className="flex flex-col gap-4"
+      onSubmit={handleSubmit(onSubmit, onError)}
+    >
+      <TransactionFormFields
+        register={register}
+        setValue={setValue}
+        selectedAssetType={selectedAssetType}
+        onAssetTypeChange={setSelectedAssetType}
+      />
       <CreateTransactionErrors errors={errors} />
-      {withFooter ? (
-        <SheetFooter className="mt-auto px-0">
-          <Button type="submit">Save Transaction</Button>
-          <SheetClose asChild>
-            <Button variant="outline">Close</Button>
-          </SheetClose>
-        </SheetFooter>
-      ) : (
-        <Button type="submit">Save Transaction</Button>
-      )}
+      <FormFooter withFooter={withFooter} />
     </form>
   );
 }

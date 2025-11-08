@@ -18,40 +18,38 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import type { Asset } from "@/types/transaction";
 import type { UseFormSetValue } from "react-hook-form";
+import type { AssetTypeT } from "@/types/asset";
 
-type AssetSelect = {
-  value: Asset;
+export type ComboOptionT = {
+  value: AssetTypeT | string;
   label: string;
 };
-
-const frameworks: AssetSelect[] = [
-  {
-    value: "CRYPTO",
-    label: "Crypto Coin",
-  },
-  {
-    value: "STOCK",
-    label: "Funds Stocks",
-  },
-];
 
 interface ComboboxProps {
   placeholder?: string;
   name: string;
   defaultValue?: string;
   setValue: UseFormSetValue<any>;
+  options?: ComboOptionT[];
 }
 
 export const Combobox = ({
-  placeholder = "Select framework...",
+  placeholder = "Select...",
   name,
   defaultValue = "",
   setValue: setFormValue,
+  options,
 }: ComboboxProps) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(defaultValue);
+
+  const handleOnSelect = (currentValue: string) => {
+    const newValue = currentValue === value ? "" : currentValue;
+    setValue(newValue);
+    setFormValue(name, newValue);
+    setOpen(false);
+  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -63,7 +61,8 @@ export const Combobox = ({
           className="w-full justify-between"
         >
           {value
-            ? frameworks.find((framework) => framework.value === value)?.label
+            ? options?.find((option: ComboOptionT) => option.value === value)
+                ?.label
             : placeholder}
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
@@ -74,24 +73,19 @@ export const Combobox = ({
           <CommandList>
             <CommandEmpty>No result found.</CommandEmpty>
             <CommandGroup>
-              {frameworks.map((framework) => (
+              {options?.map((option: ComboOptionT) => (
                 <CommandItem
-                  key={framework.value}
-                  value={framework.value}
-                  onSelect={(currentValue) => {
-                    const newValue = currentValue === value ? "" : currentValue;
-                    setValue(newValue);
-                    setFormValue(name, newValue);
-                    setOpen(false);
-                  }}
+                  key={option.value}
+                  value={option.value}
+                  onSelect={handleOnSelect}
                 >
                   <CheckIcon
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      value === option.value ? "opacity-100" : "opacity-0"
                     )}
                   />
-                  {framework.label}
+                  {option.label}
                 </CommandItem>
               ))}
             </CommandGroup>
