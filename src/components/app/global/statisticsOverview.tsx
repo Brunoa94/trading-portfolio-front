@@ -1,6 +1,6 @@
-import WithChildCard from "../common/card/withChild";
-import MoneyPercentage from "../common/visualization/moneyPercentage";
-import Percentage from "../common/visualization/percentage";
+import WithChildCard from "../features/card/withChild";
+import MoneyPercentage from "../features/visualization/moneyPercentage";
+import Percentage from "../features/visualization/percentage";
 
 function StatisticsOverview() {
   return (

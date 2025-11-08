@@ -6,6 +6,5 @@ export type TransactionI = {
   asset_type: Asset;
   amount: number;
   price_bought: number;
+  user_id: number;
 };
-
-export type CreateTransactionT = Omit<TransactionI, "id">;

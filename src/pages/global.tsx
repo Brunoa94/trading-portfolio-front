@@ -1,4 +1,4 @@
-import { TableDemo } from "@/components/app/common/transaction/transactionList";
+import { TableDemo } from "@/components/app/features/transaction/transactionList";
 import StatisticsOverview from "@/components/app/global/statisticsOverview";
 import Container from "@/components/app/layout/container";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

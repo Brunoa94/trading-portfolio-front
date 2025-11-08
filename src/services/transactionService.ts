@@ -1,6 +1,6 @@
 import type { TransactionI } from "@/types/transaction";
 import { DELETE, GET, PATCH, POST } from "./apiClient";
-import type { CreateTransactionT } from "@/schemas/transaction";
+import type { CreateTransactionT } from "@/components/app/features/transaction/createTransactionForm/schemas";
 
 export class TransactionService {
   static async getTransactions() {
@@ -13,7 +13,9 @@ export class TransactionService {
     }
   }
 
-  static async createTransaction(body: CreateTransactionT) {
+  static async createTransaction(
+    body: CreateTransactionT
+  ): Promise<TransactionI> {
     try {
       const response = await POST<TransactionI>("/tradings", body);
       return response;
