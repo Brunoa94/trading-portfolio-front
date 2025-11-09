@@ -9,7 +9,7 @@ export class UserService {
   }): Promise<TransactionI[]> {
     try {
       const response = await GET<TransactionI[]>(
-        `/users/${user_id}/transactions`
+        `/users/${user_id}a/transactions`
       );
 
       return response;

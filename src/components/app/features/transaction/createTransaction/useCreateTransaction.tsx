@@ -16,7 +16,7 @@ export default function useCreateTransaction() {
 
   const queryClient = useQueryClient();
 
-  const { mutateAsync, data, isPending } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (body: CreateTransactionT) => {
       return TransactionService.createTransaction(body);
     },
@@ -47,5 +47,6 @@ export default function useCreateTransaction() {
     setValue,
     handleSubmit,
     errors,
+    isPending,
   };
 }
