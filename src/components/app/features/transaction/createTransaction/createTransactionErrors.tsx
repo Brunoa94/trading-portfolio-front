@@ -1,5 +1,5 @@
+import type { CreateTransactionT } from "@/types/transaction";
 import type { FieldErrors } from "react-hook-form";
-import type { CreateTransactionT } from "./schemas";
 
 interface Props {
   errors: FieldErrors<CreateTransactionT>;

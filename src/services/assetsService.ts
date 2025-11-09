@@ -1,5 +1,7 @@
 import type { AssetT, AssetTypeT } from "@/types/asset";
 import { GET } from "./apiClient";
+import { AssetSchema } from "@/schemas/asset";
+import z from "zod";
 
 export class AssetsService {
   static async getAssets({
@@ -12,9 +14,15 @@ export class AssetsService {
         `/assets/${assetType.toLocaleLowerCase()}`
       );
 
-      return response;
+      return z.array(AssetSchema).parse(response);
     } catch (e) {
-      throw new Error(`Error getting assets: ` + e);
+      if (e instanceof z.ZodError) {
+        throw new Error(
+          "Invalid data received from server for Update Transaction"
+        );
+      }
+
+      throw e;
     }
   }
 }

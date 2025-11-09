@@ -17,7 +17,7 @@ import { toast } from "sonner";
 
 const HEADER_COLUMNS = [
   "ID",
-  "Description",
+  "Title",
   "Amount",
   "Price Targeted",
   "Asset",

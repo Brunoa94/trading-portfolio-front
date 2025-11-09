@@ -12,6 +12,7 @@ import AssetsCombobox from "@/components/app/common/assetsCombobox";
 
 interface Props {
   withFooter?: boolean;
+  onSuccess?: () => void;
 }
 
 const ASSETS_OPTIONS: ComboOptionT[] = [
@@ -24,12 +25,6 @@ const ASSETS_OPTIONS: ComboOptionT[] = [
     label: "Funds Stocks",
   },
 ];
-
-function useAssetTypeSelection() {
-  const [selectedAssetType, setSelectedAssetType] =
-    useState<AssetTypeT>("STOCK");
-  return { selectedAssetType, setSelectedAssetType };
-}
 
 interface TransactionFormFieldsProps {
   register: UseFormRegister<any>;
@@ -103,10 +98,11 @@ function FormFooter({ withFooter }: FormFooterProps) {
   );
 }
 
-function CreateTransactionForm({ withFooter }: Props) {
+function CreateTransactionForm({ withFooter, onSuccess }: Props) {
   const { handleSubmit, onSubmit, onError, register, setValue, errors } =
-    useCreateTransaction();
-  const { selectedAssetType, setSelectedAssetType } = useAssetTypeSelection();
+    useCreateTransaction(onSuccess);
+  const [selectedAssetType, setSelectedAssetType] =
+    useState<AssetTypeT>("STOCK");
 
   return (
     <form

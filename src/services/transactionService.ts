@@ -1,15 +1,20 @@
-import type { TransactionI } from "@/types/transaction";
+import type { CreateTransactionT, TransactionI } from "@/types/transaction";
 import { DELETE, GET, PATCH, POST } from "./apiClient";
-import type { CreateTransactionT } from "@/components/app/features/transaction/createTransaction/schemas";
+import z from "zod";
+import { TransactionSchema } from "@/schemas/transaction";
 
 export class TransactionService {
-  static async getTransactions() {
+  static async getTransactions(): Promise<TransactionI[]> {
     try {
       const response = await GET<TransactionI[]>("/tradings");
 
-      return response;
+      return z.array(TransactionSchema).parse(response);
     } catch (e) {
-      throw new Error(`Error getting transactions: ` + e);
+      if (e instanceof z.ZodError) {
+        throw new Error("Invalid data received from server for Transactions");
+      }
+
+      throw e;
     }
   }
 
@@ -18,19 +23,34 @@ export class TransactionService {
   ): Promise<TransactionI> {
     try {
       const response = await POST<TransactionI>("/tradings", body);
-      return response;
+
+      return TransactionSchema.parse(response);
     } catch (e) {
-      throw new Error(`Error creating transaction: ` + e);
+      if (e instanceof z.ZodError) {
+        throw new Error(
+          "Invalid data received from server for Create Transaction"
+        );
+      }
+
+      throw e;
     }
   }
 
-  static async updateTransaction(body: CreateTransactionT) {
+  static async updateTransaction(
+    body: CreateTransactionT
+  ): Promise<TransactionI> {
     try {
       const response = await PATCH<TransactionI>("/tradings", body);
 
-      return response;
+      return TransactionSchema.parse(response);
     } catch (e) {
-      throw new Error(`Error updating transaction: ` + e);
+      if (e instanceof z.ZodError) {
+        throw new Error(
+          "Invalid data received from server for Update Transaction"
+        );
+      }
+
+      throw e;
     }
   }
 

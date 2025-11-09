@@ -1,9 +1,5 @@
-export type AssetTypeT = "CRYPTO" | "STOCK";
+import type { AssetSchema, AssetTypeSchema } from "@/schemas/asset";
+import z from "zod";
 
-export type AssetT = {
-  type: string;
-  icon: string;
-  name: string;
-  symbol: string;
-  exchange: string;
-};
+export type AssetT = z.infer<typeof AssetSchema>;
+export type AssetTypeT = z.infer<typeof AssetTypeSchema>;

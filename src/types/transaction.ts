@@ -1,11 +1,8 @@
-import type { AssetTypeT } from "./asset";
+import { z } from "zod";
+import type {
+  CreateTransactionSchema,
+  TransactionSchema,
+} from "@/schemas/transaction";
 
-export type TransactionI = {
-  id: string;
-  description?: string;
-  asset_type: AssetTypeT;
-  amount: number;
-  price_targeted: number;
-  user_id: number;
-  symbol: string;
-};
+export type TransactionI = z.infer<typeof TransactionSchema>;
+export type CreateTransactionT = z.infer<typeof CreateTransactionSchema>;

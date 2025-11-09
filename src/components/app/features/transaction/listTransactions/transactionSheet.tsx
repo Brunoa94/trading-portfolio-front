@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -10,8 +11,10 @@ import {
 import CreateTransactionForm from "../createTransaction/createTransactionForm";
 
 function TransactionSheet() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button className="uppercase">Add Transaction</Button>
       </SheetTrigger>
@@ -23,7 +26,7 @@ function TransactionSheet() {
           </SheetDescription>
         </SheetHeader>
         <div className="grid flex-1 auto-rows-min gap-6 px-4">
-          <CreateTransactionForm withFooter />
+          <CreateTransactionForm withFooter onSuccess={() => setOpen(false)} />
         </div>
       </SheetContent>
     </Sheet>
