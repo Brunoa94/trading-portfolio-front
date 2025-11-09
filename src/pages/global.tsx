@@ -1,4 +1,4 @@
-import { TableDemo } from "@/components/app/features/transaction/transactionList";
+import ListTransactions from "@/components/app/features/transaction/listTransactions/listTransactions";
 import StatisticsOverview from "@/components/app/global/statisticsOverview";
 import Container from "@/components/app/layout/container";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ function GlobalPage() {
       <Container>
         <QueryClientProvider client={queryClient}>
           <StatisticsOverview />
-          <TableDemo />
+          <ListTransactions user_id={4} />
         </QueryClientProvider>
       </Container>
     </main>

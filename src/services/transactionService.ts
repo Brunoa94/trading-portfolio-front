@@ -1,6 +1,6 @@
 import type { TransactionI } from "@/types/transaction";
 import { DELETE, GET, PATCH, POST } from "./apiClient";
-import type { CreateTransactionT } from "@/components/app/features/transaction/createTransactionForm/schemas";
+import type { CreateTransactionT } from "@/components/app/features/transaction/createTransaction/schemas";
 
 export class TransactionService {
   static async getTransactions() {

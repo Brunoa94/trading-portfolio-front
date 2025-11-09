@@ -5,6 +5,7 @@ export type TransactionI = {
   description?: string;
   asset_type: AssetTypeT;
   amount: number;
-  price_bought: number;
+  price_targeted: number;
   user_id: number;
+  symbol: string;
 };

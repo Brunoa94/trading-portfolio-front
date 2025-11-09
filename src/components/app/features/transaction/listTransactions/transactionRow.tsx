@@ -11,8 +11,9 @@ function TransactionRow({ row }: Props) {
       <TableCell>{row.id}</TableCell>
       <TableCell>{row.description || ""}</TableCell>
       <TableCell>{row.amount}</TableCell>
-      <TableCell>{row.price_bought}€</TableCell>
+      <TableCell>{row.price_targeted}€</TableCell>
       <TableCell>{String(row.asset_type)}</TableCell>
+      <TableCell>{row.symbol}</TableCell>
     </>
   );
 }

@@ -7,7 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import CreateTransactionForm from "./createTransactionForm/createTransactionForm";
+import CreateTransactionForm from "../createTransaction/createTransactionForm";
 
 function TransactionSheet() {
   return (

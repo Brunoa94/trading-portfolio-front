@@ -20,9 +20,8 @@ export default function useCreateTransaction() {
     mutationFn: (body: CreateTransactionT) => {
       return TransactionService.createTransaction(body);
     },
-    onSuccess: (data) => {
-      console.log("Mutation success:", data);
-      queryClient.invalidateQueries({ queryKey: ["tradings"] });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users-transactions"] });
     },
     onError: (error) => {
       console.error("Mutation error:", error);
