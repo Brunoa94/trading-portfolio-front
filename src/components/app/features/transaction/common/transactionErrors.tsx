@@ -5,7 +5,7 @@ interface Props {
   errors: FieldErrors<CreateTransactionT>;
 }
 
-export const CreateTransactionErrors = ({ errors }: Props) => {
+export const TransactionErrors = ({ errors }: Props) => {
   return (
     <>
       {errors.asset_type && (

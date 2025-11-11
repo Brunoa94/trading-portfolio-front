@@ -1,16 +1,60 @@
-import WithChildCard from "../features/card/withChild";
+import { useQuery } from "@tanstack/react-query";
+import WithChildCard from "../features/common/card/withChild";
 import MoneyPercentage from "../features/visualization/moneyPercentage";
 import Percentage from "../features/visualization/percentage";
+import { UserService } from "@/services/usersService";
+import LoadingState from "../features/global/loadingState";
+import type { UserOverviewI } from "@/schemas/user";
+import useErrorHandling from "@/hooks/useErrorHandling";
 
-function StatisticsOverview() {
+interface Props {
+  user_id: number;
+}
+
+const Headers = ({
+  statisticsOverview,
+}: {
+  statisticsOverview?: UserOverviewI;
+}) => [
+  {
+    title: "Balance",
+    component: (
+      <MoneyPercentage
+        value={statisticsOverview?.balance || 0}
+        percentage={23.2}
+      />
+    ),
+  },
+  {
+    title: "Variation",
+    component: <Percentage percentage={statisticsOverview?.margin || 0} />,
+  },
+  {
+    title: "Variation",
+    component: <Percentage percentage={statisticsOverview?.margin || 0} />,
+  },
+];
+
+function StatisticsOverview({ user_id }: Props) {
+  const {
+    data: statisticsOverview,
+    isPending,
+    error,
+  } = useQuery({
+    queryKey: ["user-overview", user_id],
+    queryFn: async (): Promise<UserOverviewI> =>
+      await UserService.getUserOverview({ user_id }),
+  });
+
+  useErrorHandling({ error });
+
   return (
     <div className="mt-6 grid w-full grid-cols-3 gap-2">
-      <WithChildCard title="Balance">
-        <MoneyPercentage value={354433} percentage={23.2} />
-      </WithChildCard>
-      <WithChildCard title="Variation">
-        <Percentage percentage={23.2} />
-      </WithChildCard>
+      {Headers({ statisticsOverview }).map((element) => (
+        <WithChildCard title={element.title}>
+          {isPending ? <LoadingState /> : element.component}
+        </WithChildCard>
+      ))}
     </div>
   );
 }

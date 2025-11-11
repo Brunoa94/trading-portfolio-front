@@ -1,8 +1,8 @@
 import { useState } from "react";
 import type { AssetTypeT } from "@/types/asset";
-import useCreateTransaction from "./useCreateTransaction";
 import TransactionFormFields from "../common/transactionFormFields";
 import FormFooter from "../common/formFooter";
+import useUpdateTransaction from "./useUpdateTransaction";
 import { TransactionErrors } from "../common/transactionErrors";
 
 interface Props {
@@ -10,12 +10,12 @@ interface Props {
   onSuccess?: () => void;
 }
 
-export default function CreateTransactionForm({
+export default function UpdateTransactionForm({
   withFooter,
   onSuccess,
 }: Props) {
   const { handleSubmit, onSubmit, register, setValue, errors } =
-    useCreateTransaction(onSuccess);
+    useUpdateTransaction(onSuccess);
   const [selectedAssetType, setSelectedAssetType] =
     useState<AssetTypeT>("STOCK");
 

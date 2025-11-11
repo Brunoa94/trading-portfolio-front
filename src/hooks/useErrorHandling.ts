@@ -1,0 +1,20 @@
+import { useRef } from "react";
+import { toast } from "sonner";
+
+export default function useErrorHandling({ error }: { error: Error | null }) {
+  if (!error) return;
+
+  const errorTriggered = useRef<boolean>(false);
+
+  if (error && !errorTriggered.current) {
+    errorTriggered.current = true;
+
+    !errorTriggered.current &&
+      toast.error("Something went wrong", {
+        description: error.message,
+        duration: 3000,
+      });
+  }
+
+  return null;
+}

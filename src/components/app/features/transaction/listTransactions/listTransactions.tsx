@@ -11,9 +11,9 @@ import { useQuery } from "@tanstack/react-query";
 import TableHeader from "../../table/tableHeader";
 import TableFooter from "../../table/tableFooter";
 import { UserService } from "@/services/usersService";
-import { useRef, type PropsWithChildren } from "react";
+import { type PropsWithChildren } from "react";
 import LoadingState from "../../global/loadingState";
-import { toast } from "sonner";
+import useErrorHandling from "@/hooks/useErrorHandling";
 
 const HEADER_COLUMNS = [
   "ID",
@@ -53,22 +53,14 @@ export default function ListTransactions({ user_id }: Props) {
     data: userTransactionsList = [],
     isPending,
     error,
-    isError,
   } = useQuery({
     queryKey: ["users-transactions", user_id],
     queryFn: async () => await UserService.getUserTransactions({ user_id }),
   });
-  const errorTriggered = useRef<boolean>(false);
 
-  if (error || isError) {
-    !errorTriggered.current &&
-      toast.error("Something went wrong", {
-        description: error.message,
-        duration: 3000,
-      });
+  useErrorHandling({ error });
 
-    errorTriggered.current = true;
-
+  if (error) {
     return (
       <TableContainer>
         <span className="w-full border-b-2 border-white py-4 pb-2 text-center text-xl font-bold text-nowrap">

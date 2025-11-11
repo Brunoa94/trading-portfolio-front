@@ -1,26 +1,26 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { UpdateTransactionSchema } from "@/schemas/transaction";
 import { TransactionService } from "@/services/transactionService";
+import type { UpdateTransactionT } from "@/types/transaction";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import type { CreateTransactionT } from "@/types/transaction";
-import { CreateTransactionSchema } from "@/schemas/transaction";
 import { toast } from "sonner";
 
-export default function useCreateTransaction(onSuccess?: () => void) {
+export default function useUpdateTransaction(onSuccess?: () => void) {
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<CreateTransactionT>({
-    resolver: zodResolver(CreateTransactionSchema),
+  } = useForm<UpdateTransactionT>({
+    resolver: zodResolver(UpdateTransactionSchema),
   });
 
   const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: (body: CreateTransactionT) => {
-      return TransactionService.createTransaction(body);
+    mutationFn: (body: UpdateTransactionT) => {
+      return TransactionService.updateTransaction(body);
     },
     onSuccess: () => {
       toast.success("Transaction created", {
@@ -37,7 +37,7 @@ export default function useCreateTransaction(onSuccess?: () => void) {
     },
   });
 
-  const onSubmit = async (body: CreateTransactionT) => {
+  const onSubmit = async (body: UpdateTransactionT) => {
     await mutateAsync(body);
   };
 

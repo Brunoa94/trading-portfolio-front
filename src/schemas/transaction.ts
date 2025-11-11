@@ -14,3 +14,5 @@ export const TransactionSchema = z.object({
 export const CreateTransactionSchema = TransactionSchema.omit({
   id: true,
 });
+
+export const UpdateTransactionSchema = TransactionSchema.partial();

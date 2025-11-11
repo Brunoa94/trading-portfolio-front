@@ -1,4 +1,8 @@
-import type { CreateTransactionT, TransactionI } from "@/types/transaction";
+import type {
+  CreateTransactionT,
+  TransactionI,
+  UpdateTransactionT,
+} from "@/types/transaction";
 import { DELETE, GET, PATCH, POST } from "./apiClient";
 import z from "zod";
 import { TransactionSchema } from "@/schemas/transaction";
@@ -37,7 +41,7 @@ export class TransactionService {
   }
 
   static async updateTransaction(
-    body: CreateTransactionT
+    body: UpdateTransactionT
   ): Promise<TransactionI> {
     try {
       const response = await PATCH<TransactionI>("/tradings", body);

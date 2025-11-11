@@ -6,3 +6,4 @@ import type {
 
 export type TransactionI = z.infer<typeof TransactionSchema>;
 export type CreateTransactionT = z.infer<typeof CreateTransactionSchema>;
+export type UpdateTransactionT = Partial<z.infer<typeof TransactionSchema>>;

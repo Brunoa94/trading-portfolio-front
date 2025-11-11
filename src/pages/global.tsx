@@ -10,7 +10,7 @@ function GlobalPage() {
     <main className="flex w-full justify-center">
       <Container>
         <QueryClientProvider client={queryClient}>
-          <StatisticsOverview />
+          <StatisticsOverview user_id={4} />
           <ListTransactions user_id={4} />
         </QueryClientProvider>
       </Container>
