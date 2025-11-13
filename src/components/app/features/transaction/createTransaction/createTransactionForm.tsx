@@ -10,10 +10,7 @@ interface Props {
   onSuccess?: () => void;
 }
 
-export default function CreateTransactionForm({
-  withFooter,
-  onSuccess,
-}: Props) {
+export default function CreateTransactionForm({ onSuccess }: Props) {
   const { handleSubmit, onSubmit, register, setValue, errors } =
     useCreateTransaction(onSuccess);
   const [selectedAssetType, setSelectedAssetType] =
@@ -28,7 +25,6 @@ export default function CreateTransactionForm({
         onAssetTypeChange={setSelectedAssetType}
       />
       <TransactionErrors errors={errors} />
-      <FormFooter withFooter={withFooter} />
     </form>
   );
 }

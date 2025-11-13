@@ -28,14 +28,16 @@ interface Props {
   user_id: number;
 }
 
-const TableContainer = ({ children }: PropsWithChildren) => (
-  <div className="mt-6 flex w-full flex-col gap-2">
-    <div className="flex w-full items-center justify-end p-2">
-      <TransactionSheet />
+const TableContainer = ({ children }: PropsWithChildren) => {
+  return (
+    <div className="mt-6 flex w-full flex-col gap-2">
+      <div className="flex w-full items-center justify-end p-2">
+        <TransactionSheet />
+      </div>
+      {children}
     </div>
-    {children}
-  </div>
-);
+  );
+};
 
 const TableElements = ({ children }: PropsWithChildren) => (
   <TableContainer>
@@ -57,10 +59,11 @@ export default function ListTransactions({ user_id }: Props) {
     queryKey: ["users-transactions", user_id],
     queryFn: async () => await UserService.getUserTransactions({ user_id }),
   });
-
-  useErrorHandling({ error });
+  const triggerError = useErrorHandling({ error });
 
   if (error) {
+    triggerError();
+
     return (
       <TableContainer>
         <span className="w-full border-b-2 border-white py-4 pb-2 text-center text-xl font-bold text-nowrap">
