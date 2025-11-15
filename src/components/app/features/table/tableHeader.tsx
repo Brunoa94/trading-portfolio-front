@@ -17,6 +17,8 @@ const TableHeader = ({ columns }: Props) => (
           {column}
         </TableHead>
       ))}
+      <TableHead />
+      <TableHead />
     </TableRow>
   </StyledTableHeader>
 );

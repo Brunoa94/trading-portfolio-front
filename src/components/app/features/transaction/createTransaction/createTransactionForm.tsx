@@ -2,8 +2,8 @@ import { useState } from "react";
 import type { AssetTypeT } from "@/types/asset";
 import useCreateTransaction from "./useCreateTransaction";
 import TransactionFormFields from "../common/transactionFormFields";
-import FormFooter from "../common/formFooter";
 import { TransactionErrors } from "../common/transactionErrors";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   withFooter?: boolean;
@@ -24,6 +24,7 @@ export default function CreateTransactionForm({ onSuccess }: Props) {
         selectedAssetType={selectedAssetType}
         onAssetTypeChange={setSelectedAssetType}
       />
+      <Button type="submit">Save Transaction</Button>
       <TransactionErrors errors={errors} />
     </form>
   );

@@ -5,7 +5,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import type { TransactionI } from "@/types/transaction";
-import TransactionSheet from "./transactionSheet";
+import TransactionSheet from "../createTransaction/createTransactionSheet";
 import TransactionRow from "./transactionRow";
 import { useQuery } from "@tanstack/react-query";
 import TableHeader from "../../table/tableHeader";
@@ -27,28 +27,6 @@ const HEADER_COLUMNS = [
 interface Props {
   user_id: number;
 }
-
-const TableContainer = ({ children }: PropsWithChildren) => {
-  return (
-    <div className="mt-6 flex w-full flex-col gap-2">
-      <div className="flex w-full items-center justify-end p-2">
-        <TransactionSheet />
-      </div>
-      {children}
-    </div>
-  );
-};
-
-const TableElements = ({ children }: PropsWithChildren) => (
-  <TableContainer>
-    <Table>
-      <TableCaption>A list of all your transactions.</TableCaption>
-      <TableHeader columns={HEADER_COLUMNS} />
-      <TableBody>{children}</TableBody>
-      <TableFooter colSpan={4} />
-    </Table>
-  </TableContainer>
-);
 
 export default function ListTransactions({ user_id }: Props) {
   const {
@@ -91,3 +69,25 @@ export default function ListTransactions({ user_id }: Props) {
     </TableElements>
   );
 }
+
+const TableContainer = ({ children }: PropsWithChildren) => {
+  return (
+    <div className="mt-6 flex w-full flex-col gap-2">
+      <div className="flex w-full items-center justify-end p-2">
+        <TransactionSheet />
+      </div>
+      {children}
+    </div>
+  );
+};
+
+const TableElements = ({ children }: PropsWithChildren) => (
+  <TableContainer>
+    <Table>
+      <TableCaption>A list of all your transactions.</TableCaption>
+      <TableHeader columns={HEADER_COLUMNS} />
+      <TableBody>{children}</TableBody>
+      <TableFooter colSpan={4} />
+    </Table>
+  </TableContainer>
+);

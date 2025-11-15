@@ -1,5 +1,6 @@
 import { TableCell } from "@/components/ui/table";
 import type { TransactionI } from "@/types/transaction";
+import UpdateTransactionSheet from "../updateTransaction/updateTransactionSheet";
 
 interface Props {
   row: TransactionI;
@@ -14,6 +15,7 @@ function TransactionRow({ row }: Props) {
       <TableCell>{row.price_targeted}€</TableCell>
       <TableCell>{String(row.asset_type)}</TableCell>
       <TableCell>{row.symbol}</TableCell>
+      <UpdateTransactionSheet transaction={row} />
     </>
   );
 }

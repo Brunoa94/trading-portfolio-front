@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -16,7 +15,6 @@ interface Props {
   title: string;
   description?: string;
   content: React.ReactNode;
-  submitButton?: React.ReactNode;
   closeButton?: React.ReactNode;
   open: boolean;
   setOpen: (value: boolean) => void;
@@ -27,7 +25,6 @@ export default function SideSheet({
   title,
   description,
   content,
-  submitButton,
   open,
   setOpen,
 }: Props) {
@@ -41,7 +38,6 @@ export default function SideSheet({
         </SheetHeader>
         <div className="grid flex-1 auto-rows-min gap-6 px-4">{content}</div>
         <SheetFooter className="px-0">
-          {submitButton}
           <SheetClose asChild>
             <Button variant="outline">Close</Button>
           </SheetClose>

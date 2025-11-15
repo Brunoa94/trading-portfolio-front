@@ -3,7 +3,7 @@ import type {
   TransactionI,
   UpdateTransactionT,
 } from "@/types/transaction";
-import { DELETE, GET, PATCH, POST } from "./apiClient";
+import { DELETE, GET, PATCH, POST, PUT } from "./apiClient";
 import z from "zod";
 import { TransactionSchema } from "@/schemas/transaction";
 
@@ -44,7 +44,7 @@ export class TransactionService {
     body: UpdateTransactionT
   ): Promise<TransactionI> {
     try {
-      const response = await PATCH<TransactionI>("/tradings", body);
+      const response = await PUT<TransactionI>(`/tradings/${body.id}`, body);
 
       return TransactionSchema.parse(response);
     } catch (e) {

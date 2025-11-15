@@ -16,6 +16,7 @@ const queryClient = new QueryClient();
 interface Props {
   assetType: AssetTypeT;
   setValue: UseFormSetValue<any>;
+  defaultValue?: string;
 }
 
 function AssetsToOptions(assets: AssetT[]): ComboOptionT[] {
@@ -26,7 +27,11 @@ function AssetsToOptions(assets: AssetT[]): ComboOptionT[] {
   return map;
 }
 
-export default function AssetsCombobox({ assetType, setValue }: Props) {
+export default function AssetsCombobox({
+  assetType,
+  setValue,
+  defaultValue,
+}: Props) {
   const { data: comboOptions } = useQuery({
     queryKey: ["assets", assetType],
     queryFn: () => AssetsService.getAssets({ assetType }),
@@ -40,6 +45,7 @@ export default function AssetsCombobox({ assetType, setValue }: Props) {
         setValue={setValue}
         options={comboOptions}
         placeholder="Select your stock"
+        defaultValue={defaultValue}
       />
     </QueryClientProvider>
   );

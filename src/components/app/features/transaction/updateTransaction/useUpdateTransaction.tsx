@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
-export default function useUpdateTransaction(onSuccess?: () => void) {
+export default function useUpdateTransaction(onSuccess?: () => void, defaultValues?: UpdateTransactionT) {
   const {
     register,
     handleSubmit,
@@ -14,6 +14,7 @@ export default function useUpdateTransaction(onSuccess?: () => void) {
     formState: { errors },
   } = useForm<UpdateTransactionT>({
     resolver: zodResolver(UpdateTransactionSchema),
+    defaultValues,
   });
 
   const queryClient = useQueryClient();

@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import WithChildCard from "../features/common/card/withChild";
-import MoneyPercentage from "../features/visualization/moneyPercentage";
-import Percentage from "../features/visualization/percentage";
 import { UserService } from "@/services/usersService";
 import LoadingState from "../features/global/loadingState";
 import type { UserOverviewI } from "@/schemas/user";
 import useErrorHandling from "@/hooks/useErrorHandling";
+import MoneyPercentage from "../features/common/visualization/moneyPercentage";
+import Percentage from "../features/common/visualization/percentage";
 
 interface Props {
   user_id: number;

@@ -1,34 +1,38 @@
 import { useState } from "react";
 import type { AssetTypeT } from "@/types/asset";
 import TransactionFormFields from "../common/transactionFormFields";
-import FormFooter from "../common/formFooter";
 import useUpdateTransaction from "./useUpdateTransaction";
 import { TransactionErrors } from "../common/transactionErrors";
+import type { TransactionI } from "@/types/transaction";
+import { Button } from "@/components/ui/button";
 
 interface Props {
-  withFooter?: boolean;
   onSuccess?: () => void;
+  transaction: TransactionI;
 }
 
 export default function UpdateTransactionForm({
-  withFooter,
   onSuccess,
+  transaction,
 }: Props) {
   const { handleSubmit, onSubmit, register, setValue, errors } =
-    useUpdateTransaction(onSuccess);
-  const [selectedAssetType, setSelectedAssetType] =
-    useState<AssetTypeT>("STOCK");
+    useUpdateTransaction(onSuccess, transaction);
+  const [selectedAssetType, setSelectedAssetType] = useState<AssetTypeT>(
+    (transaction.asset_type as AssetTypeT) || "STOCK"
+  );
 
   return (
     <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <input type="hidden" {...register("id")} value={transaction.id} />
       <TransactionFormFields
         register={register}
         setValue={setValue}
         selectedAssetType={selectedAssetType}
         onAssetTypeChange={setSelectedAssetType}
+        transaction={transaction}
       />
+      <Button type="submit">Save Transaction</Button>
       <TransactionErrors errors={errors} />
-      <FormFooter withFooter={withFooter} />
     </form>
   );
 }
