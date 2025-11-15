@@ -1,6 +1,7 @@
 import { TableCell } from "@/components/ui/table";
 import type { TransactionI } from "@/types/transaction";
 import UpdateTransactionSheet from "../updateTransaction/updateTransactionSheet";
+import DeleteTransactionButton from "../deleteTransaction/deleteTransactionButton";
 
 interface Props {
   row: TransactionI;
@@ -15,7 +16,12 @@ function TransactionRow({ row }: Props) {
       <TableCell>{row.price_targeted}€</TableCell>
       <TableCell>{String(row.asset_type)}</TableCell>
       <TableCell>{row.symbol}</TableCell>
-      <UpdateTransactionSheet transaction={row} />
+      <TableCell>
+        <UpdateTransactionSheet transaction={row} />
+      </TableCell>
+      <TableCell>
+        <DeleteTransactionButton id={row.id} />
+      </TableCell>
     </>
   );
 }

@@ -58,7 +58,7 @@ export class TransactionService {
     }
   }
 
-  static async deleteTransaction(id: string) {
+  static async deleteTransaction(id: number) {
     try {
       const response = await DELETE<unknown>(`/tradings/${id}`);
 
