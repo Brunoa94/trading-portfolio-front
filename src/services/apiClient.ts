@@ -1,5 +1,10 @@
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
+
 const HEADERS = {
   "Content-Type": "application/json",
+  Authorization: `Bearer ${cookies.get("jwt-session-token")}`,
 };
 
 const BACKEND_DOMAIN = import.meta.env.VITE_BACKEND_DOMAIN;
@@ -22,11 +27,14 @@ export async function GET<T>(endpoint: string): Promise<T> {
 }
 
 export async function POST<T>(endpoint: string, body?: any): Promise<T> {
+  const isFormData = body instanceof FormData;
   try {
     const response = await fetch(`${BACKEND_DOMAIN}${endpoint}`, {
       method: "POST",
-      headers: HEADERS,
-      body: JSON.stringify(body),
+      headers: isFormData
+        ? { Authorization: `Bearer ${cookies.get("jwt-session-token")}` }
+        : HEADERS,
+      body: isFormData ? body : JSON.stringify(body),
     });
 
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);

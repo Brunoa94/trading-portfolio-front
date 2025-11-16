@@ -6,23 +6,18 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema, type LoginUserT } from "@/schemas/login";
-import { Form } from "../input/form";
+import { Form } from "../../input/form";
+import useLoginAuthentication from "./useLoginAuthentication";
 
 function LoginForm() {
-  const { register, handleSubmit, reset } = useForm({
-    resolver: zodResolver(LoginSchema),
-  });
-
-  const onSubmit = (data: LoginUserT) => {
-    reset();
-  };
+  const { register, onAuthenticate, handleSubmit } = useLoginAuthentication();
 
   return (
     <DialogContent className="max-w-[425px]">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <form
+        onSubmit={handleSubmit(onAuthenticate)}
+        className="flex flex-col gap-4"
+      >
         <DialogHeader>
           <DialogTitle className="text-center">Login User</DialogTitle>
         </DialogHeader>

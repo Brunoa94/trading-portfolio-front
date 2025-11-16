@@ -1,6 +1,6 @@
 "use server";
 
-import Login from "../features/login/login";
+import Login from "../features/auth/loginAuthentication/login";
 import NavbarLink from "./navbarLink";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";

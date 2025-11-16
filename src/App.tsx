@@ -8,8 +8,11 @@ import MarketPage from "./pages/market";
 import Layout from "./components/app/layout/layout";
 import GlobalPage from "./pages/global";
 import { Toaster } from "./components/ui/sonner";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
+  const queryClient = new QueryClient();
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -44,10 +47,10 @@ function App() {
   ]);
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Toaster />
       <RouterProvider router={router} />
-    </>
+    </QueryClientProvider>
   );
 }
 

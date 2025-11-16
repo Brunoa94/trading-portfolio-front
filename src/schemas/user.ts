@@ -6,4 +6,13 @@ export const UserOverviewSchema = z.object({
   margin: z.number(),
 });
 
+export const UserDetailsSchema = z.object({
+  username: z.string(),
+  email: z.string(),
+  address: z.string(),
+  country: z.string(),
+  icon: z.string(),
+  id: z.number(),
+});
+
 export type UserOverviewI = z.infer<typeof UserOverviewSchema>;
