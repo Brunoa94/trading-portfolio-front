@@ -1,7 +1,7 @@
-import TransactionSheet from "@/components/app/features/transaction/createTransaction/createTransactionSheet";
-import ListTransactions from "@/components/app/features/transaction/listTransactions/listTransactions";
-import StatisticsOverview from "@/components/app/global/statisticsOverview";
-import Container from "@/components/app/layout/container";
+import TransactionSheet from "@/components/features/transaction/createTransaction/createTransactionSheet";
+import ListTransactions from "@/components/features/transaction/listTransactions/listTransactions";
+import StatisticsOverview from "@/components/ui-elements/transactions/statisticsOverview";
+import Container from "@/components/layout/container";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();

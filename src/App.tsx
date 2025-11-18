@@ -5,7 +5,7 @@ import ProfilePage from "./pages/profile";
 import TransactionsPage from "./pages/transactions";
 import TransactionDetailsPage from "./pages/transactionDetails";
 import MarketPage from "./pages/market";
-import Layout from "./components/app/layout/layout";
+import Layout from "./components/layout/layout";
 import GlobalPage from "./pages/global";
 import { Toaster } from "./components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

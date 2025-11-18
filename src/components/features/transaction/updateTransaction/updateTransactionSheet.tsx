@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import UpdateTransactionForm from "./updateTransactionForm";
-import SideSheet from "../../common/sideSheet";
+import SideSheet from "../../../ui-elements/action/sideSheet";
 import type { TransactionI } from "@/types/transaction";
 
 interface Props {

@@ -3,7 +3,7 @@ import type { AssetT, AssetTypeT } from "@/types/asset";
 import {
   Combobox,
   type ComboOptionT,
-} from "@/components/app/features/input/combobox";
+} from "@/components/features/input/combobox";
 import {
   QueryClient,
   QueryClientProvider,

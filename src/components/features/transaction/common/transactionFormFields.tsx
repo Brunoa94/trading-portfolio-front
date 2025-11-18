@@ -2,7 +2,7 @@ import type { AssetTypeT } from "@/types/asset";
 import type { UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { Form } from "../../input/form";
 import { Combobox, type ComboOptionT } from "../../input/combobox";
-import AssetsCombobox from "../../common/assetsCombobox";
+import AssetsCombobox from "../../../ui-elements/assets/assetsCombobox";
 import PriceSection from "./priceSection";
 import type { TransactionI } from "@/types/transaction";
 

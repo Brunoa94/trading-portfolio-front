@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import CreateTransactionForm from "./createTransactionForm";
-import SideSheet from "../../common/sideSheet";
+import SideSheet from "../../../ui-elements/action/sideSheet";
 
 function TransactionSheet() {
   const [sheetOpen, setSheetOpen] = useState<boolean>(false);
@@ -10,7 +10,7 @@ function TransactionSheet() {
     <SideSheet
       title="Add Transaction"
       sheetTrigger={
-        <Button className="uppercase" type="submit">
+        <Button className="uppercase" type="submit" variant="outline">
           Create Transaction
         </Button>
       }
