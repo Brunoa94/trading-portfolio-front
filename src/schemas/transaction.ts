@@ -16,3 +16,7 @@ export const CreateTransactionSchema = TransactionSchema.omit({
 });
 
 export const UpdateTransactionSchema = TransactionSchema.partial();
+
+export const PaginatedTransactions = z.object({
+  items: z.array(TransactionSchema),
+});

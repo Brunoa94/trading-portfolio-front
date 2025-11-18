@@ -8,7 +8,7 @@ interface Props {
 function NavbarLink({ href, name }: Props) {
   return (
     <NavLink
-      className="text-foreground font-notch diagonal-gradient text-3xl font-bold transition-all duration-300 ease-in-out hover:-translate-y-1 hover:text-gray-400 lg:text-lg"
+      className="text-foreground font-notch text-3xl font-bold transition-all duration-300 ease-in-out hover:-translate-y-1 hover:text-purple-800 hover:opacity-80 lg:text-lg"
       to={href}
     >
       {name}

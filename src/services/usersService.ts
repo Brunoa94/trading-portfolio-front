@@ -2,7 +2,7 @@ import type { TransactionI } from "@/types/transaction";
 import { GET } from "./apiClient";
 import { UserOverviewSchema, type UserOverviewI } from "@/schemas/user";
 import z from "zod";
-import { TransactionSchema } from "@/schemas/transaction";
+import { PaginatedTransactions } from "@/schemas/transaction";
 
 type PropsWithUserId = {
   user_id: number;
@@ -17,7 +17,7 @@ export class UserService {
         `/users/${user_id}/transactions`
       );
 
-      return z.array(TransactionSchema).parse(response);
+      return PaginatedTransactions.parse(response).items;
     } catch (e) {
       if (e instanceof z.ZodError) {
         console.log(e);

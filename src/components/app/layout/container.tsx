@@ -1,10 +1,14 @@
 import type { PropsWithChildren } from "react";
+import { Container as ContainerS } from "@/components/app/styles/container";
+import { Gradient } from "../styles/gradient";
 
 interface Props extends PropsWithChildren {}
 
 function Container({ children }: Props) {
   return (
-    <main className="from-accent/20 via-accent/10 border-border/50 hover:border-border mt-4 rounded-lg border bg-gradient-to-br to-transparent p-8 pb-12 shadow-lg transition-all duration-300 hover:shadow-xl">
+    <main
+      className={`${ContainerS.MainContainer} ${Gradient.GrayCard} border-secondary flex flex-col gap-4 rounded-lg border`}
+    >
       {children}
     </main>
   );

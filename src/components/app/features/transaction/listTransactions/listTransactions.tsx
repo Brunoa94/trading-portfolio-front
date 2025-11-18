@@ -24,6 +24,25 @@ const HEADER_COLUMNS = [
   "Symbol",
 ];
 
+const TableContainer = ({ children }: PropsWithChildren) => {
+  return (
+    <div className="border-secondary flex w-full flex-col gap-2 rounded-md border-4 p-4">
+      {children}
+    </div>
+  );
+};
+
+const TableElements = ({ children }: PropsWithChildren) => (
+  <TableContainer>
+    <Table>
+      <TableCaption>A list of all your transactions.</TableCaption>
+      <TableHeader columns={HEADER_COLUMNS} />
+      <TableBody>{children}</TableBody>
+      <TableFooter colSpan={4} />
+    </Table>
+  </TableContainer>
+);
+
 interface Props {
   user_id: number;
 }
@@ -69,25 +88,3 @@ export default function ListTransactions({ user_id }: Props) {
     </TableElements>
   );
 }
-
-const TableContainer = ({ children }: PropsWithChildren) => {
-  return (
-    <div className="mt-6 flex w-full flex-col gap-2">
-      <div className="flex w-full items-center justify-end p-2">
-        <TransactionSheet />
-      </div>
-      {children}
-    </div>
-  );
-};
-
-const TableElements = ({ children }: PropsWithChildren) => (
-  <TableContainer>
-    <Table>
-      <TableCaption>A list of all your transactions.</TableCaption>
-      <TableHeader columns={HEADER_COLUMNS} />
-      <TableBody>{children}</TableBody>
-      <TableFooter colSpan={4} />
-    </Table>
-  </TableContainer>
-);
