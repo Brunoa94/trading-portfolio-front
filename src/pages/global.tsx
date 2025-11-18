@@ -7,14 +7,12 @@ const queryClient = new QueryClient();
 
 function GlobalPage() {
   return (
-    <main className="flex w-full justify-center">
-      <Container>
-        <QueryClientProvider client={queryClient}>
-          <StatisticsOverview user_id={4} />
-          <ListTransactions user_id={4} />
-        </QueryClientProvider>
-      </Container>
-    </main>
+    <Container>
+      <QueryClientProvider client={queryClient}>
+        <StatisticsOverview user_id={6} />
+        <ListTransactions user_id={6} />
+      </QueryClientProvider>
+    </Container>
   );
 }
 

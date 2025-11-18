@@ -51,7 +51,7 @@ function StatisticsOverview({ user_id }: Props) {
   return (
     <div className="mt-6 grid w-full grid-cols-3 gap-2">
       {Headers({ statisticsOverview }).map((element) => (
-        <WithChildCard title={element.title}>
+        <WithChildCard title={element.title} variant="diagonal-purple">
           {isPending ? <LoadingState /> : element.component}
         </WithChildCard>
       ))}

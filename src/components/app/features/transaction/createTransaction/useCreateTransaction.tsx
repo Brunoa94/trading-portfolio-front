@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { TransactionService } from "@/services/transactionService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import type { CreateTransactionT } from "@/types/transaction";
+import type { CreateTransactionT, TransactionI } from "@/types/transaction";
 import { CreateTransactionSchema } from "@/schemas/transaction";
 import { toast } from "sonner";
 
@@ -19,14 +19,16 @@ export default function useCreateTransaction(onSuccess?: () => void) {
   const queryClient = useQueryClient();
 
   const { mutateAsync, isPending } = useMutation({
-    mutationFn: (body: CreateTransactionT) => {
+    mutationFn: (body: CreateTransactionT): Promise<TransactionI> => {
       return TransactionService.createTransaction(body);
     },
-    onSuccess: () => {
+    onSuccess: (response: TransactionI) => {
       toast.success("Transaction created", {
         duration: 3000,
       });
-      queryClient.invalidateQueries({ queryKey: ["users-transactions"] });
+      queryClient.invalidateQueries({
+        queryKey: ["users-transactions", response.user_id],
+      });
       onSuccess?.();
     },
     onError: (error) => {

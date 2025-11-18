@@ -1,9 +1,12 @@
 @import "tailwindcss";
+@tailwind utilities;
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-notch: "Stack Sans Notch", sans-serif;
+  --font-zalando: "Zalando Sans Expanded", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

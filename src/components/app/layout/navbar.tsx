@@ -85,7 +85,7 @@ function Mobile() {
 
 function Desktop() {
   return (
-    <nav className="border-primary text-primary relative hidden h-16 w-full items-center gap-8 border-b px-4 text-lg md:justify-center lg:flex!">
+    <nav className="text-primary relative hidden h-16 w-full items-center gap-8 px-4 text-lg md:justify-center lg:flex!">
       <HomepageLink />
       <NavLinks />
       <Login />
@@ -99,11 +99,13 @@ function HomepageLink() {
       to="/"
       className="relative flex items-center gap-2 text-xl lg:absolute! lg:left-4"
     >
-      <LucideBitcoin
-        height={44}
-        width={44}
-        className="fill-primary stroke-primary"
-      />
+      <div className="bg-card-gradient border-transaparent flex items-center justify-center rounded-md bg-gradient-to-br from-transparent/26 via-purple-900/26 to-green-800 p-2">
+        <LucideBitcoin
+          height={32}
+          width={32}
+          className="fill-primary stroke-primary"
+        />
+      </div>
       <h1 className="text-primary">Capital Lens</h1>
     </NavLink>
   );

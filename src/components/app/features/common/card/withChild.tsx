@@ -1,19 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { PropsWithChildren } from "react";
 
+type VariantT = "diagonal-purple";
 interface Props extends PropsWithChildren {
   title: string;
+  variant: VariantT;
 }
 
-function WithChildCard({ title, children }: Props) {
+const CardVariant: Record<VariantT, string> = {
+  "diagonal-purple":
+    "bg-gradient-to-br from-purple-900/6 via-purple-900/26 to-neutral-800 border-transaparent border-b border-b-green-900",
+};
+
+function WithChildCard({ title, children, variant }: Props) {
   return (
-    <Card
-      className="flex h-26 w-full max-w-sm gap-0 border-none"
-      style={{
-        background:
-          "linear-gradient(163deg,rgba(48, 48, 48, 1) 46%, rgba(77, 77, 77, 1) 98%)",
-      }}
-    >
+    <Card className={`flex h-26 w-full max-w-sm gap-0 ${CardVariant[variant]}`}>
       <CardHeader>
         <CardTitle className="text-md text-primary!">{title}</CardTitle>
       </CardHeader>
