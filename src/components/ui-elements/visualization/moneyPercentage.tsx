@@ -1,4 +1,4 @@
-import VariationBanner from "../../global/variationBanner";
+import VariationBanner from "@/components/features/global/variationBanner";
 
 interface Props {
   value: number;

@@ -1,4 +1,4 @@
-import UpDownArrow from "../../global/upDownArrow";
+import UpDownArrow from "@/components/features/global/upDownArrow";
 
 interface Props {
   percentage: number;

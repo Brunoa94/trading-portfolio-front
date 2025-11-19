@@ -1,5 +1,5 @@
+import { Container } from "@/theme/container";
 import { useLocation } from "react-router-dom";
-import { Container } from "../styles/container";
 
 interface RouteConfig {
   title: string;

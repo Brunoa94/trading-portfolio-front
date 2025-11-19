@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "./navbar";
 import TitleDescription from "./titleDescription";
-import { Gradient } from "../styles/gradient";
+import { Gradient } from "@/theme/gradient";
 
 function Layout() {
   return (

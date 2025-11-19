@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
-import { Container as ContainerS } from "@/components/styles/container";
-import { Gradient } from "../styles/gradient";
+import { Container as ContainerS } from "@/theme/container";
+import { Gradient } from "@/theme/gradient";
 
 interface Props extends PropsWithChildren {}
 
