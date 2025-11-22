@@ -12,7 +12,7 @@ import TableHeader from "../../table/tableHeader";
 import TableFooter from "../../table/tableFooter";
 import { UserService } from "@/services/usersService";
 import { type PropsWithChildren } from "react";
-import LoadingState from "../../global/loadingState";
+import LoadingState from "../../../ui-elements/visualization/loadingState";
 import useErrorHandling from "@/hooks/useErrorHandling";
 
 const HEADER_COLUMNS = [

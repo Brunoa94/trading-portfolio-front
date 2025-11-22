@@ -16,5 +16,6 @@ export default function useGetOverview({ user_id }: Props) {
   return {
     isPending,
     data,
+    error,
   };
 }

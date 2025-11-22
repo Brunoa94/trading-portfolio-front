@@ -1,4 +1,4 @@
-import VariationBanner from "@/components/features/global/variationBanner";
+import VariationBanner from "./variationBanner";
 
 interface Props {
   value: number;
@@ -11,7 +11,7 @@ function MoneyPercentage({ value, percentage }: Props) {
       <span className="bg-gradient-to-r from-slate-100 to-blue-200 bg-clip-text font-mono text-3xl font-bold text-transparent">
         € {value}
       </span>
-      <VariationBanner value={percentage} />
+      {<VariationBanner value={percentage} />}
     </div>
   );
 }

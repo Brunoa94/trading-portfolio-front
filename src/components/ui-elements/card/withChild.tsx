@@ -1,17 +1,26 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Border } from "@/theme/border";
 import { Gradient } from "@/theme/gradient";
 import type { PropsWithChildren } from "react";
 
-type VariantT = "diagonal-purple" | "diagonal-green";
+export type WithChildCardVariantT =
+  | "diagonal-purple"
+  | "diagonal-green"
+  | "diagonal-red"
+  | "diagonal-dark-green-purple"
+  | "gray-card";
 interface Props extends PropsWithChildren {
   title: string;
-  variant: VariantT;
+  variant: WithChildCardVariantT;
   icon?: React.ReactNode;
 }
 
-const CardVariant: Record<VariantT, string> = {
+const CardVariant: Record<WithChildCardVariantT, string> = {
   "diagonal-purple": Gradient.DiagonalDarkGreenPurple,
   "diagonal-green": Gradient.DiagonalGreen,
+  "diagonal-red": Gradient.DiagonalRed,
+  "diagonal-dark-green-purple": Border.DiagonalDarkGreenPurple,
+  "gray-card": Gradient.GrayCard,
 };
 
 function WithChildCard({ title, children, icon, variant }: Props) {

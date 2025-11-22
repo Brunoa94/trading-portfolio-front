@@ -7,6 +7,7 @@
 @theme inline {
   --font-notch: "Stack Sans Notch", sans-serif;
   --font-zalando: "Zalando Sans Expanded", sans-serif;
+  --color-dark-purple: var(--dark-purple);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -77,6 +78,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --dark-purple: oklch(0.35 0.15 280);
 }
 
 .dark {
@@ -111,6 +113,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --dark-purple: oklch(0.35 0.15 280);
 }
 
 @layer base {
