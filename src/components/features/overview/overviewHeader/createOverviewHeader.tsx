@@ -50,11 +50,11 @@ export default function CreateOverviewHeader({ user_id }: Props) {
   if (!data) return <>No data</>;
 
   return (
-    <div className="grid grid-cols-4 gap-3">
+    <section className="grid grid-cols-4 gap-3">
       <NonGradientBanner balance={data.balance} />
       <NonGradientBanner balance={data.balance} />
       <GradientBanner value={data.margin} title="Margin 24h" />
       <GradientBanner value={data.value_invested} title="Value Invested" />
-    </div>
+    </section>
   );
 }
