@@ -8,10 +8,11 @@ import MarketPage from "./pages/market";
 import Layout from "./components/layout/layout";
 import GlobalPage from "./pages/global";
 import { Toaster } from "./components/ui/sonner";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
+
+import { queryClient } from "@/clients/queryClient";
 
 function App() {
-  const queryClient = new QueryClient();
 
   const router = createBrowserRouter([
     {

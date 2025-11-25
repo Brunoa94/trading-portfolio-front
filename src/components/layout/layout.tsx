@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./navbar";
+import Navbar from "./navbar/navbar";
 import TitleDescription from "./titleDescription";
 import { Gradient } from "@/theme/gradient";
 
