@@ -12,8 +12,11 @@ function TopPerformerCard({ card, index }: Props) {
     <article
       className={`flex flex-col ${CardColors[index]} gap-4 rounded-lg border-2 p-4`}
     >
-      <div className="flex flex-col">
-        <p className="text-3xl">{RankingEmoji[index]}</p>
+      <div className="flex flex-col items-start">
+        <div className="flex flex-col items-center">
+          <img src={card.asset_icon} className="h-12 w-12 rounded-full" />
+          <p className="-mt-1 text-3xl">{RankingEmoji[index]}</p>
+        </div>
       </div>
       <div className="flex flex-col">
         <p className="text-sm text-gray-400">Asset</p>

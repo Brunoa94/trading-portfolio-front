@@ -27,7 +27,7 @@ export default function AssetsCombobox({
 }: Props) {
   const { data: comboOptions } = useQuery({
     queryKey: ["assets", assetType],
-    queryFn: () => AssetsService.getAssets({ assetType }),
+    queryFn: () => AssetsService.getAssets(),
     select: (assets: AssetT[]): ComboOptionT[] => AssetsToOptions(assets),
   });
 

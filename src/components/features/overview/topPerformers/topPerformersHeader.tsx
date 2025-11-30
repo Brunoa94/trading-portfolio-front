@@ -1,4 +1,3 @@
-import type { TopPerformerT } from "@/types/userOverview";
 import TopPerformerCard from "../../../ui-elements/overview/topPerformerCard";
 import { Trophy } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
@@ -34,7 +33,7 @@ function TopPerformersHeader({ user_id }: Props) {
         <h3>Top Performers</h3>
       </div>
       <div className="grid w-full grid-cols-3 gap-4">
-        {userTopPerformers.map((performer, index) => (
+        {userTopPerformers.slice(0, 3).map((performer, index) => (
           <TopPerformerCard key={index} card={performer} index={index} />
         ))}
       </div>

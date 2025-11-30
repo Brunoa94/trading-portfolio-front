@@ -14,4 +14,5 @@ export const TopPerformerSchema = z.object({
   profit_loss_percentage: z.number(),
   avg_buy_price: z.number(),
   current_price: z.number(),
+  asset_icon: z.string(),
 });

@@ -4,15 +4,9 @@ import { AssetSchema } from "@/schemas/asset";
 import z from "zod";
 
 export class AssetsService {
-  static async getAssets({
-    assetType,
-  }: {
-    assetType: AssetTypeT;
-  }): Promise<AssetT[]> {
+  static async getAssets(): Promise<AssetT[]> {
     try {
-      const response = await GET<AssetT[]>(
-        `/assets/${assetType.toLocaleLowerCase()}`
-      );
+      const response = await GET<AssetT[]>(`/assets/`);
 
       return z.array(AssetSchema).parse(response);
     } catch (e) {
