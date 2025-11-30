@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import UpdateTransactionForm from "./updateTransactionForm";
 import SideSheet from "../../../ui-elements/action/sideSheet";
 import type { TransactionI } from "@/types/transaction";
+import { Eye } from "lucide-react";
 
 interface Props {
   transaction: TransactionI;
@@ -14,7 +15,11 @@ function UpdateTransactionSheet({ transaction }: Props) {
   return (
     <SideSheet
       title="Update Transaction"
-      sheetTrigger={<Button className="my-2 uppercase">Update</Button>}
+      sheetTrigger={
+        <Button className="my-2 rounded-full uppercase">
+          <Eye />
+        </Button>
+      }
       description={`Transaction #${transaction.id}`}
       content={
         <UpdateTransactionForm

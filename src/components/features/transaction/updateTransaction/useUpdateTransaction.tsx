@@ -3,19 +3,24 @@ import { TransactionService } from "@/services/transactionService";
 import type { UpdateTransactionT } from "@/types/transaction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { useForm, useFormContext } from "react-hook-form";
 import { toast } from "sonner";
 
-export default function useUpdateTransaction(onSuccess?: () => void, defaultValues?: UpdateTransactionT) {
+export default function useUpdateTransaction(
+  onSuccess?: () => void,
+  defaultValues?: UpdateTransactionT
+) {
+  const form = useForm<UpdateTransactionT>({
+    resolver: zodResolver(UpdateTransactionSchema),
+    defaultValues,
+  });
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<UpdateTransactionT>({
-    resolver: zodResolver(UpdateTransactionSchema),
-    defaultValues,
-  });
+  } = form;
 
   const queryClient = useQueryClient();
 
@@ -49,5 +54,6 @@ export default function useUpdateTransaction(onSuccess?: () => void, defaultValu
     handleSubmit,
     errors,
     isPending,
+    form,
   };
 }
