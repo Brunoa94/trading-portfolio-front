@@ -7,14 +7,16 @@ import { CreateTransactionSchema } from "@/schemas/transaction";
 import { toast } from "sonner";
 
 export default function useCreateTransaction(onSuccess?: () => void) {
+  const form = useForm<CreateTransactionT>({
+    resolver: zodResolver(CreateTransactionSchema),
+  });
+
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<CreateTransactionT>({
-    resolver: zodResolver(CreateTransactionSchema),
-  });
+  } = form;
 
   const queryClient = useQueryClient();
 
@@ -50,5 +52,6 @@ export default function useCreateTransaction(onSuccess?: () => void) {
     handleSubmit,
     errors,
     isPending,
+    form,
   };
 }

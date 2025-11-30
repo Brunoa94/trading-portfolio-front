@@ -12,6 +12,7 @@ const InputText = ({ defaultValue, name, title, register }: InputT) => {
 };
 
 const InputNumber = ({ defaultValue, name, title, register }: InputT) => {
+  console.log("VALUE: ", defaultValue);
   return (
     <div className="flex flex-col gap-3">
       <Label htmlFor={name}>{title}</Label>

@@ -65,6 +65,7 @@ function TransactionFormFields({
       <PriceSection
         register={register}
         defaultValue={transaction?.price_targeted}
+        name="price_targeted"
       />
       <Form.InputNumber
         name="user_id"

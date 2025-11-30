@@ -4,6 +4,7 @@ import useCreateTransaction from "./useCreateTransaction";
 import TransactionFormFields from "../common/transactionFormFields";
 import { TransactionErrors } from "../common/transactionErrors";
 import { Button } from "@/components/ui/button";
+import { FormProvider } from "react-hook-form";
 
 interface Props {
   withFooter?: boolean;
@@ -11,21 +12,23 @@ interface Props {
 }
 
 export default function CreateTransactionForm({ onSuccess }: Props) {
-  const { handleSubmit, onSubmit, register, setValue, errors } =
+  const { handleSubmit, onSubmit, register, setValue, errors, form } =
     useCreateTransaction(onSuccess);
   const [selectedAssetType, setSelectedAssetType] =
     useState<AssetTypeT>("STOCK");
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-      <TransactionFormFields
-        register={register}
-        setValue={setValue}
-        selectedAssetType={selectedAssetType}
-        onAssetTypeChange={setSelectedAssetType}
-      />
-      <Button type="submit">Save Transaction</Button>
-      <TransactionErrors errors={errors} />
-    </form>
+    <FormProvider {...form}>
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+        <TransactionFormFields
+          register={register}
+          setValue={setValue}
+          selectedAssetType={selectedAssetType}
+          onAssetTypeChange={setSelectedAssetType}
+        />
+        <Button type="submit">Save Transaction</Button>
+        <TransactionErrors errors={errors} />
+      </form>
+    </FormProvider>
   );
 }

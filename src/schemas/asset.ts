@@ -9,3 +9,8 @@ export const AssetSchema = z.object({
   symbol: z.string(),
   exchange: z.string(),
 });
+
+export const AssetPriceSchema = z.object({
+  symbol: z.string(),
+  current_price: z.number(),
+});
