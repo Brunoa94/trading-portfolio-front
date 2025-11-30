@@ -24,6 +24,7 @@ import type { AssetTypeT } from "@/types/asset";
 export type ComboOptionT = {
   value: AssetTypeT | string;
   label: string;
+  icon?: string;
 };
 
 interface ComboboxProps {
@@ -67,7 +68,7 @@ export const Combobox = ({
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-full p-0">
+      <PopoverContent className="w-[--radix-popover-trigger-width] max-h-[--radix-popover-content-available-height] p-0">
         <Command className="w-full">
           <CommandInput placeholder="Search framework..." />
           <CommandList>
@@ -81,10 +82,16 @@ export const Combobox = ({
                 >
                   <CheckIcon
                     className={cn(
-                      "mr-2 h-4 w-4",
+                      "mr-2 flex h-4 w-4 items-center gap-2",
                       value === option.value ? "opacity-100" : "opacity-0"
                     )}
                   />
+                  {option.icon && (
+                    <img
+                      src={option.icon}
+                      className="h-[16px] w-[16px] rounded-full"
+                    />
+                  )}
                   {option.label}
                 </CommandItem>
               ))}

@@ -10,6 +10,7 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import type { UseFormSetValue } from "react-hook-form";
+import AssetsToOptions from "@/components/features/transaction/common/assetsToOptions";
 
 const queryClient = new QueryClient();
 
@@ -17,14 +18,6 @@ interface Props {
   assetType: AssetTypeT;
   setValue: UseFormSetValue<any>;
   defaultValue?: string;
-}
-
-function AssetsToOptions(assets: AssetT[]): ComboOptionT[] {
-  const map = assets.map((asset) => ({
-    value: asset.symbol,
-    label: `(${asset.symbol})`,
-  }));
-  return map;
 }
 
 export default function AssetsCombobox({

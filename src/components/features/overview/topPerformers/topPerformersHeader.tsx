@@ -1,4 +1,3 @@
-import React from "react";
 import TopPerformerCard from "../../../ui-elements/overview/topPerformerCard";
 import type { TopPerformerT } from "@/types/userOverview";
 import { Trophy } from "lucide-react";
