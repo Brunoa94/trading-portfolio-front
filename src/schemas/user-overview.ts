@@ -7,10 +7,11 @@ export const UserOverviewSchema = z.object({
 });
 
 export const TopPerformerSchema = z.object({
-  ranking: z.enum(["gold", "silver", "bronze"]),
   symbol: z.string(),
-  quantity: z.number(),
-  value_invested: z.number(),
-  marginPercentage: z.number(),
-  marginNumber: z.number(),
+  total_investment: z.number(),
+  current_value: z.number(),
+  profit_loss: z.number(),
+  profit_loss_percentage: z.number(),
+  avg_buy_price: z.number(),
+  current_price: z.number(),
 });

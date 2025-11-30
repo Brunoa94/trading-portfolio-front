@@ -10,7 +10,7 @@ function GlobalPage() {
     <Container>
       <QueryClientProvider client={queryClient}>
         <CreateOverviewHeader user_id={6} />
-        <TopPerformersHeader />
+        <TopPerformersHeader user_id={6} />
       </QueryClientProvider>
     </Container>
   );
