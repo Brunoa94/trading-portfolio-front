@@ -1,10 +1,4 @@
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-} from "@/components/ui/pagination";
+import { Pagination } from "@/components/ui/pagination";
 import usePaginator from "./usePaginator";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,11 +21,6 @@ function Paginator() {
       <Button onClick={goPrevPage} disabled={prevDisabled} className="mr-auto">
         <MoveLeft />
       </Button>
-      {/* {intermediatePages.slice(0, 2).map((pageNumber) => (
-          <PaginationItem>
-            <PaginationLink href="#">{pageNumber}</PaginationLink>
-          </PaginationItem>
-        ))} */}
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-2">
           <span className="text-sm">Page</span>
@@ -42,11 +31,6 @@ function Paginator() {
           <span className="text-md font-bold">{maxPages}</span>
         </div>
       </div>
-      {/* {intermediatePages.slice(2, 4).map((pageNumber) => (
-          <PaginationItem>
-            <PaginationLink href="#">{pageNumber}</PaginationLink>
-          </PaginationItem>
-        ))} */}
       <Button onClick={goNextPage} disabled={nextDisabled} className="ml-auto">
         <MoveRight />
       </Button>
