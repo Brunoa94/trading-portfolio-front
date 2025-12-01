@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import UpdateTransactionForm from "./updateTransactionForm";
-import SideSheet from "../../../ui-elements/action/sideSheet";
+import SideSheet from "../../../ui-elements/common/sideSheet";
 import type { TransactionI } from "@/types/transaction";
 import { Eye } from "lucide-react";
 

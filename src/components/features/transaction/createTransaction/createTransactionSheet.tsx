@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import CreateTransactionForm from "./createTransactionForm";
-import SideSheet from "../../../ui-elements/action/sideSheet";
+import SideSheet from "../../../ui-elements/common/sideSheet";
 
 function TransactionSheet() {
   const [sheetOpen, setSheetOpen] = useState<boolean>(false);

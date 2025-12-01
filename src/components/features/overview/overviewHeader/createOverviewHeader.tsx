@@ -2,10 +2,9 @@ import WithChildCard, {
   type WithChildCardVariantT,
 } from "@/components/ui-elements/card/withChild";
 import useGetOverview from "./useGetOverview";
-import UpDownArrow from "@/components/ui-elements/visualization/upDownArrow";
-import ContainerWithIcon, {
-  type ContainerBackgroundT,
-} from "@/components/ui-elements/visualization/containerWithIcon";
+import type { ContainerBackgroundT } from "@/components/ui-elements/common/graphics/containerWithIcon";
+import ContainerWithIcon from "@/components/ui-elements/common/graphics/containerWithIcon";
+import UpDownArrow from "@/components/ui-elements/common/graphics/upDownArrow";
 
 interface Props {
   user_id: number;

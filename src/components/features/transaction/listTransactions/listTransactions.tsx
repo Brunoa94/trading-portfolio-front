@@ -5,15 +5,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import type { TransactionI } from "@/types/transaction";
-import TransactionSheet from "../createTransaction/createTransactionSheet";
 import TransactionRow from "./transactionRow";
 import { useQuery } from "@tanstack/react-query";
 import TableHeader from "../../table/tableHeader";
 import TableFooter from "../../table/tableFooter";
 import { UserService } from "@/services/usersService";
 import { type PropsWithChildren } from "react";
-import LoadingState from "../../../ui-elements/visualization/loadingState";
 import useErrorHandling from "@/hooks/useErrorHandling";
+import Paginator from "@/components/ui-elements/common/paginator/paginator";
+import LoadingState from "@/components/ui-elements/common/graphics/loadingState";
 
 const HEADER_COLUMNS = [
   "ID",
@@ -79,12 +79,15 @@ export default function ListTransactions({ user_id }: Props) {
   }
 
   return (
-    <TableElements>
-      {userTransactionsList?.map((transaction: TransactionI) => (
-        <TableRow key={`id-${transaction.id}`}>
-          <TransactionRow row={transaction} />
-        </TableRow>
-      ))}
-    </TableElements>
+    <section className="flex w-full flex-col gap-2">
+      <TableElements>
+        {userTransactionsList?.map((transaction: TransactionI) => (
+          <TableRow key={`id-${transaction.id}`}>
+            <TransactionRow row={transaction} />
+          </TableRow>
+        ))}
+      </TableElements>
+      <Paginator />
+    </section>
   );
 }

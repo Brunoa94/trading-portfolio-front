@@ -1,14 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import WithChildCard from "../card/withChild";
 import { UserService } from "@/services/usersService";
-import LoadingState from "../visualization/loadingState";
 import type { UserOverviewI } from "@/schemas/user";
 import useErrorHandling from "@/hooks/useErrorHandling";
 import { ChartCandlestick, Euro, WalletMinimal } from "lucide-react";
-import MoneyPercentage from "../visualization/moneyPercentage";
-import Percentage from "../visualization/percentage";
-import ContainerWithIcon from "../visualization/containerWithIcon";
-
+import MoneyPercentage from "../common/graphics/moneyPercentage";
+import Percentage from "../common/graphics/percentage";
+import ContainerWithIcon from "../common/graphics/containerWithIcon";
+import LoadingState from "../common/graphics/loadingState";
 interface Props {
   user_id: number;
 }
