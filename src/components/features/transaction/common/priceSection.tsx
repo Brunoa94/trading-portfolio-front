@@ -22,7 +22,7 @@ export default function PriceSection({ register, defaultValue, name }: Props) {
     error,
   } = useQuery({
     queryKey: ["asset-price", symbol],
-    queryFn: async () => await AssetsService.getAssetPrice({ symbol }),
+    queryFn: async () => await AssetsService.getAssetPrice(symbol),
     enabled: !!symbol,
   });
   const triggerError = useErrorHandling({ error });

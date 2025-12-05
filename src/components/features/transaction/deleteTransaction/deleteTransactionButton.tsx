@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function DeleteTransactionButton({ id }: Props) {
-  const { onDelete, isPending } = useDeleteTransaction({ id });
+  const { onDelete } = useDeleteTransaction({ id });
 
   return (
     <Button onClick={onDelete} className="color-white" color="red">

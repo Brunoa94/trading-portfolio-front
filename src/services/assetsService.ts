@@ -20,11 +20,7 @@ export class AssetsService {
     }
   }
 
-  static async getAssetPrice({
-    symbol,
-  }: {
-    symbol: string;
-  }): Promise<AssetPriceT> {
+  static async getAssetPrice(symbol: string): Promise<AssetPriceT> {
     try {
       const response = await GET<AssetPriceT>(`/assets/${symbol}/price/`);
 

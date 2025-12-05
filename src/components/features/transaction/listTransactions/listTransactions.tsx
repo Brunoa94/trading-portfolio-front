@@ -1,38 +1,13 @@
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableRow,
-} from "@/components/ui/table";
+import { TableRow } from "@/components/ui/table";
 import type { TransactionI } from "@/types/transaction";
 import { useQuery } from "@tanstack/react-query";
-import TableHeader from "../../table/tableHeader";
 import { UserService } from "@/services/usersService";
-import { type PropsWithChildren } from "react";
 import useErrorHandling from "@/hooks/useErrorHandling";
 import Paginator from "@/components/ui-elements/common/paginator/paginator";
 import LoadingState from "@/components/ui-elements/common/graphics/loadingState";
-import { TransactionRow } from "./transactionRow";
-
-const HEADER_COLUMNS = ["ID", "Title", "Amount", "Price Targeted", "Symbol"];
-
-const TableContainer = ({ children }: PropsWithChildren) => {
-  return (
-    <div className="border-secondary flex w-full flex-col gap-2 rounded-md border-4 p-4">
-      {children}
-    </div>
-  );
-};
-
-const TableElements = ({ children }: PropsWithChildren) => (
-  <TableContainer>
-    <Table>
-      <TableHeader columns={HEADER_COLUMNS} />
-      <TableBody>{children}</TableBody>
-    </Table>
-  </TableContainer>
-);
-
+import { TransactionRow } from "../common/transaction/transactionRow";
+import { Font } from "@/theme/font";
+import { Table, TableContainer } from "../../table/table";
 interface Props {
   user_id: number;
 }
@@ -70,13 +45,14 @@ export default function ListTransactions({ user_id }: Props) {
 
   return (
     <section className="flex w-full flex-col gap-2">
-      <TableElements>
+      <h3 className={`${Font.TableTitle}`}>List of your transactions</h3>
+      <Table.ListTransactions>
         {userTransactionsList?.map((transaction: TransactionI) => (
           <TableRow key={`id-${transaction.id}`}>
             <TransactionRow.WithIdTitleActions row={transaction} />
           </TableRow>
         ))}
-      </TableElements>
+      </Table.ListTransactions>
       <Paginator />
     </section>
   );

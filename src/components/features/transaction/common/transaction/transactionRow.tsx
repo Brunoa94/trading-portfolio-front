@@ -1,7 +1,7 @@
 import { TableCell } from "@/components/ui/table";
 import type { TransactionI } from "@/types/transaction";
-import UpdateTransactionSheet from "../updateTransaction/updateTransactionSheet";
-import DeleteTransactionButton from "../deleteTransaction/deleteTransactionButton";
+import UpdateTransactionSheet from "../../updateTransaction/updateTransactionSheet";
+import DeleteTransactionButton from "../../deleteTransaction/deleteTransactionButton";
 import type { PropsWithChildren } from "react";
 import UpDownArrow from "@/components/ui-elements/common/graphics/upDownArrow";
 import VariationBanner from "@/components/ui-elements/common/graphics/variationBanner";

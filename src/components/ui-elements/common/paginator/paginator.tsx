@@ -18,7 +18,11 @@ function Paginator() {
 
   return (
     <Pagination className="flex w-full items-center px-2 md:px-6">
-      <Button onClick={goPrevPage} disabled={prevDisabled} className="mr-auto">
+      <Button
+        onClick={goPrevPage}
+        disabled={prevDisabled}
+        className="mr-auto cursor-pointer"
+      >
         <MoveLeft />
       </Button>
       <div className="flex items-center gap-2">
@@ -31,7 +35,11 @@ function Paginator() {
           <span className="text-md font-bold">{maxPages}</span>
         </div>
       </div>
-      <Button onClick={goNextPage} disabled={nextDisabled} className="ml-auto">
+      <Button
+        onClick={goNextPage}
+        disabled={nextDisabled}
+        className="ml-auto cursor-pointer"
+      >
         <MoveRight />
       </Button>
     </Pagination>
