@@ -16,8 +16,8 @@ function UpdateTransactionSheet({ transaction }: Props) {
     <SideSheet
       title="Update Transaction"
       sheetTrigger={
-        <Button className="my-2 rounded-full uppercase">
-          <Eye />
+        <Button className="my-2 rounded-full bg-transparent uppercase">
+          <Eye color="green" className="h-[32px] w-[32px]" />
         </Button>
       }
       description={`Transaction #${transaction.id}`}

@@ -8,16 +8,27 @@ type PropsWithUserId = {
   user_id: number;
 };
 
+type GetUserTransactionsProps = {
+  user_id: number;
+  page?: number;
+  limit?: number;
+};
+
 export class UserService {
   static async getUserTransactions({
     user_id,
-  }: PropsWithUserId): Promise<TransactionI[]> {
+    page = 1,
+    limit = 10,
+  }: GetUserTransactionsProps) {
     try {
-      const response = await GET<TransactionI[]>(
-        `/users/${user_id}/transactions`
-      );
+      const params = new URLSearchParams({
+        page: page.toString(),
+        limit: limit.toString(),
+      });
 
-      return PaginatedTransactions.parse(response).items;
+      const response = await GET(`/users/${user_id}/transactions`);
+
+      return response.items;
     } catch (e) {
       if (e instanceof z.ZodError) {
         console.log(e);
