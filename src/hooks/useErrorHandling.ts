@@ -8,11 +8,10 @@ export default function useErrorHandling({ error }: { error: Error | null }) {
     if (error && !errorTriggered.current) {
       errorTriggered.current = true;
 
-      !errorTriggered.current &&
-        toast.error("Something went wrong", {
-          description: error.message,
-          duration: 3000,
-        });
+      toast.error("Something went wrong", {
+        description: error.message,
+        duration: 3000,
+      });
     }
   };
 

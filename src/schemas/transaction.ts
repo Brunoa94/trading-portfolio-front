@@ -1,5 +1,6 @@
 import z from "zod";
 import { AssetTypeSchema } from "./asset";
+import { formatDate } from "../utils/formatDate";
 
 export const TransactionSchema = z.object({
   id: z.number(),
@@ -16,6 +17,17 @@ export const CreateTransactionSchema = TransactionSchema.omit({
 });
 
 export const UpdateTransactionSchema = TransactionSchema.partial();
+
+export const TransactionWithVariationSchema = TransactionSchema.extend({
+  variation: z.object({
+    difference_value: z.number(),
+    difference_percentage: z.number()
+  }),
+  created_at: z.string()
+}).transform((data) => ({
+  ...data,
+  created_at: formatDate(data.created_at)
+}));
 
 export const PaginatedTransactions = z.object({
   items: z.array(TransactionSchema),

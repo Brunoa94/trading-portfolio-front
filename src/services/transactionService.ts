@@ -3,7 +3,7 @@ import type {
   TransactionI,
   UpdateTransactionT,
 } from "@/types/transaction";
-import { DELETE, GET, PATCH, POST, PUT } from "./apiClient";
+import { DELETE, GET, POST, PUT } from "./apiClient";
 import z from "zod";
 import { TransactionSchema } from "@/schemas/transaction";
 

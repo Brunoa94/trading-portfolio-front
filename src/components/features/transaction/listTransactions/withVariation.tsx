@@ -1,0 +1,66 @@
+import useErrorHandling from "@/hooks/useErrorHandling";
+import { UserService } from "@/services/usersService";
+import { useQuery } from "@tanstack/react-query";
+import { Table, TableContainer } from "../../table/table";
+import LoadingState from "@/components/ui-elements/common/graphics/loadingState";
+import { Font } from "@/theme/font";
+import { TableRow } from "@/components/ui/table";
+import type {
+  TransactionI,
+  TransactionWithVariationI,
+} from "@/types/transaction";
+import Paginator from "@/components/ui-elements/common/paginator/paginator";
+import { TransactionRow } from "../common/transaction/transactionRow";
+
+interface Props {
+  user_id: number;
+}
+
+function ListTransactionsWithVariation({ user_id }: Props) {
+  const {
+    data: userTransactionsList = [],
+    isPending,
+    error,
+  } = useQuery({
+    queryKey: ["users-transactions-with-variation", user_id],
+    queryFn: async () =>
+      await UserService.getUserTransactionsWithVariation({ user_id }),
+  });
+  const triggerError = useErrorHandling({ error });
+
+  if (error) {
+    triggerError();
+
+    return (
+      <TableContainer>
+        <span className="w-full border-b-2 border-white py-4 pb-2 text-center text-xl font-bold text-nowrap">
+          No transactions found
+        </span>
+      </TableContainer>
+    );
+  }
+
+  if (isPending) {
+    return (
+      <TableContainer>
+        <LoadingState />
+      </TableContainer>
+    );
+  }
+
+  return (
+    <section className="flex w-full flex-col gap-2">
+      <h3 className={`${Font.TableTitle}`}>List of your transactions</h3>
+      <Table.ListTransactionsWithVariation>
+        {userTransactionsList?.map((transaction: TransactionWithVariationI) => (
+          <TableRow key={`id-${transaction.id}`}>
+            <TransactionRow.WithVariationLabels row={transaction} />
+          </TableRow>
+        ))}
+      </Table.ListTransactionsWithVariation>
+      <Paginator />
+    </section>
+  );
+}
+
+export default ListTransactionsWithVariation;

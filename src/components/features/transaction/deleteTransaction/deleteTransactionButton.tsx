@@ -12,13 +12,12 @@ export default function DeleteTransactionButton({ id }: Props) {
   return (
     <Button
       onClick={onDelete}
-      className="color-white bg-transparent hover:bg-white"
+      className="color-white cursor-pointer bg-transparent hover:bg-white"
     >
       <Trash
         size={36}
         absoluteStrokeWidth
-        color="red"
-        className="h-[26px] w-[26px]"
+        className="h-[26px] w-[26px] text-red-800"
       />
     </Button>
   );

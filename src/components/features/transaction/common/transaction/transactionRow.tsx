@@ -1,13 +1,19 @@
 import { TableCell } from "@/components/ui/table";
-import type { TransactionI } from "@/types/transaction";
+import type {
+  TransactionI,
+  TransactionWithVariationI,
+} from "@/types/transaction";
 import UpdateTransactionSheet from "../../updateTransaction/updateTransactionSheet";
 import DeleteTransactionButton from "../../deleteTransaction/deleteTransactionButton";
 import type { PropsWithChildren } from "react";
-import UpDownArrow from "@/components/ui-elements/common/graphics/upDownArrow";
 import VariationBanner from "@/components/ui-elements/common/graphics/variationBanner";
 
 interface Props extends PropsWithChildren {
   row: TransactionI;
+}
+
+interface PropsWithVariation {
+  row: TransactionWithVariationI;
 }
 
 const TransactionLabels = ({ row }: Props) => (
@@ -30,14 +36,14 @@ const WithUpdateDelete = ({ row }: Props) => (
   </>
 );
 
-const WithVariationLabels = ({ row }: Props) => (
+const WithVariationLabels = ({ row }: PropsWithVariation) => (
   <>
+    <TableCell></TableCell>
     <TransactionLabels row={row} />
+    <TableCell>{row.price_targeted}€</TableCell>
+    <TableCell>{row.created_at}</TableCell>
     <TableCell>
-      <UpDownArrow value={25} />
-    </TableCell>
-    <TableCell>
-      <VariationBanner value={25} />
+      <VariationBanner value={row.variation.difference_percentage} />
     </TableCell>
   </>
 );

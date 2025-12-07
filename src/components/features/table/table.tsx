@@ -10,19 +10,44 @@ export const TableContainer = ({ children }: PropsWithChildren) => {
   );
 };
 
-const ListTransactions = ({ children }: PropsWithChildren) => {
-  const HEADER_COLUMNS = ["ID", "Title", "Amount", "Price Targeted", "Symbol"];
+interface TableSkeletonProps extends PropsWithChildren {
+  headerColumns: string[];
+}
 
-  return (
-    <TableContainer>
-      <TableC>
-        <TableHeader columns={HEADER_COLUMNS} />
-        <TableBody>{children}</TableBody>
-      </TableC>
-    </TableContainer>
-  );
-};
+export const TableSkeleton = ({
+  children,
+  headerColumns,
+}: TableSkeletonProps) => (
+  <TableContainer>
+    <TableC>
+      <TableHeader columns={headerColumns} />
+      <TableBody>{children}</TableBody>
+    </TableC>
+  </TableContainer>
+);
+
+const ListTransactions = ({ children }: PropsWithChildren) => (
+  <TableSkeleton
+    children={children}
+    headerColumns={["ID", "Title", "Amount", "Price Targeted", "Symbol"]}
+  />
+);
+
+const ListTransactionsWithVariation = ({ children }: PropsWithChildren) => (
+  <TableSkeleton
+    children={children}
+    headerColumns={[
+      "",
+      "Amount",
+      "Invested Amount",
+      "Symbol",
+      "Current Price",
+      "Date",
+    ]}
+  />
+);
 
 export const Table = {
   ListTransactions,
+  ListTransactionsWithVariation,
 };
