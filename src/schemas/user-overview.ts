@@ -16,3 +16,18 @@ export const TopPerformerSchema = z.object({
   current_price: z.number(),
   asset_icon: z.string(),
 });
+
+export const GrowthPortfolioSchema = z.object({
+  timestamp: z.string().optional(),
+  portfolio_value: z.number(),
+  absolute_diff: z.number(),
+  percentage_diff: z.number(),
+});
+
+export const UserGrowthDataSchema = z.object({
+  current_portfolio_value: z.number(),
+  growth_24h: GrowthPortfolioSchema,
+  growth_week: GrowthPortfolioSchema,
+  growth_month: GrowthPortfolioSchema,
+  growth_year: GrowthPortfolioSchema,
+});

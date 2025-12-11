@@ -1,4 +1,3 @@
-import * as React from "react";
 import { cn } from "@/lib/utils";
 
 interface AnimatedBackgroundProps {
@@ -19,7 +18,7 @@ export default function AnimatedBackground({
   return (
     <div
       className={cn(
-        "absolute bg-background shadow-sm transition-all ease-in-out",
+        "bg-background absolute shadow-sm transition-all ease-in-out",
         borderRadius,
         className
       )}

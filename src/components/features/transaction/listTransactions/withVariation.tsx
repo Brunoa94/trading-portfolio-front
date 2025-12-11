@@ -5,10 +5,7 @@ import { Table, TableContainer } from "../../table/table";
 import LoadingState from "@/components/ui-elements/common/graphics/loadingState";
 import { Font } from "@/theme/font";
 import { TableRow } from "@/components/ui/table";
-import type {
-  TransactionI,
-  TransactionWithVariationI,
-} from "@/types/transaction";
+import type { TransactionWithVariationI } from "@/types/transaction";
 import Paginator from "@/components/ui-elements/common/paginator/paginator";
 import { TransactionRow } from "../common/transaction/transactionRow";
 
