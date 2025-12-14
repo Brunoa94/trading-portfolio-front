@@ -31,3 +31,14 @@ export const UserGrowthDataSchema = z.object({
   growth_month: GrowthPortfolioSchema,
   growth_year: GrowthPortfolioSchema,
 });
+
+export const PodiumEntrySchema = z.object({
+  symbol: z.string(),
+  value: z.number(),
+});
+
+export const PodiumsDataSchema = z.object({
+  investment_podium: z.array(PodiumEntrySchema).max(3),
+  transactions_podium: z.array(PodiumEntrySchema).max(3),
+  performance_podium: z.array(PodiumEntrySchema).max(3),
+});

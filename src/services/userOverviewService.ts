@@ -2,16 +2,38 @@ import type {
   UserGrowthDataT,
   TopPerformerT,
   UserOverviewT,
+  PodiumsDataT,
 } from "@/types/userOverview";
 import { GET } from "./apiClient";
 import { UserOverviewSchema } from "@/schemas/user";
 import z from "zod";
 import {
+  PodiumsDataSchema,
   TopPerformerSchema,
   UserGrowthDataSchema,
 } from "@/schemas/user-overview";
 
 export class UserOverviewService {
+  static async getUserSymbolsPodium({
+    user_id,
+  }: {
+    user_id: number;
+  }): Promise<PodiumsDataT> {
+    try {
+      const response = await GET<PodiumsDataT>(`/tradings/${user_id}/podium/`);
+
+      return PodiumsDataSchema.parse(response);
+    } catch (e) {
+      if (e instanceof z.ZodError) {
+        throw new Error(
+          "Invalid data received from server for User symbols podium"
+        );
+      }
+
+      throw e;
+    }
+  }
+
   static async getUserPortfolioGrowth({
     user_id,
   }: {

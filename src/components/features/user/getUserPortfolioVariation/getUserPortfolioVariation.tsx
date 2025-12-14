@@ -1,9 +1,6 @@
-import WithChildCard from "@/components/ui-elements/card/withChild";
-import type { OptionItem } from "@/components/ui-elements/common/optionsTab/optionsTab";
 import OptionsTab from "@/components/ui-elements/common/optionsTab/optionsTab";
 import { Spinner } from "@/components/ui/spinner";
 import useErrorHandling from "@/hooks/useErrorHandling";
-import { UserOverviewSchema } from "@/schemas/user";
 import { UserOverviewService } from "@/services/userOverviewService";
 import { Font } from "@/theme/font";
 import type {
