@@ -3,8 +3,6 @@ import usePaginator from "./usePaginator";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { UButton } from "@/components/ui-elements/buttons/UButton";
 
-interface Props {}
-
 function Paginator() {
   const {
     currentPage,
