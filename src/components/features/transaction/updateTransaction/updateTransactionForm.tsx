@@ -4,7 +4,7 @@ import TransactionFormFields from "../common/transactionFormFields";
 import useUpdateTransaction from "./useUpdateTransaction";
 import { TransactionErrors } from "../common/transactionErrors";
 import type { TransactionI } from "@/types/transaction";
-import { Button } from "@/components/ui/button";
+import { UButton } from "@/components/ui-elements/buttons/UButton";
 import { FormProvider } from "react-hook-form";
 
 interface Props {
@@ -33,7 +33,9 @@ export default function UpdateTransactionForm({
           onAssetTypeChange={setSelectedAssetType}
           transaction={transaction}
         />
-        <Button type="submit">Save Transaction</Button>
+        <UButton.WithVariant ariaLabel="Save transaction" variant="default" type="submit">
+          Save Transaction
+        </UButton.WithVariant>
         <TransactionErrors errors={errors} />
       </form>
     </FormProvider>

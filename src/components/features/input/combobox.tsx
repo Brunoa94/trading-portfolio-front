@@ -4,7 +4,7 @@ import * as React from "react";
 import { CheckIcon, ChevronsUpDownIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { UButton } from "@/components/ui-elements/buttons/UButton";
 import {
   Command,
   CommandEmpty,
@@ -55,7 +55,8 @@ export const Combobox = ({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
+        <UButton.WithVariant
+          ariaLabel="Select option"
           variant="outline"
           role="combobox"
           aria-expanded={open}
@@ -66,7 +67,7 @@ export const Combobox = ({
                 ?.label
             : placeholder}
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-        </Button>
+        </UButton.WithVariant>
       </PopoverTrigger>
       <PopoverContent className="w-[--radix-popover-trigger-width] max-h-[--radix-popover-content-available-height] p-0">
         <Command className="w-full">

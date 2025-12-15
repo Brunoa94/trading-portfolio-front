@@ -2,7 +2,7 @@
 
 import Login from "../../features/auth/loginAuthentication/login";
 import NavbarLink from "./navbarLink";
-import { Button } from "@/components/ui/button";
+import { UButton } from "@/components/ui-elements/buttons/UButton";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { LucideBitcoin, MenuIcon } from "lucide-react";
@@ -57,10 +57,14 @@ function MobileMenu() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="absolute left-4">
+        <UButton.WithVariant
+          ariaLabel="Open menu"
+          variant="outline"
+          className="absolute left-4"
+        >
           <MenuIcon />
           <span>Menu</span>
-        </Button>
+        </UButton.WithVariant>
       </DialogTrigger>
       <DialogContent
         style={{ transform: "translateY(50%)" }}

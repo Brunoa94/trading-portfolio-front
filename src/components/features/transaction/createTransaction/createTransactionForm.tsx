@@ -3,7 +3,7 @@ import type { AssetTypeT } from "@/types/asset";
 import useCreateTransaction from "./useCreateTransaction";
 import TransactionFormFields from "../common/transactionFormFields";
 import { TransactionErrors } from "../common/transactionErrors";
-import { Button } from "@/components/ui/button";
+import { UButton } from "@/components/ui-elements/buttons/UButton";
 import { FormProvider } from "react-hook-form";
 
 interface Props {
@@ -26,7 +26,9 @@ export default function CreateTransactionForm({ onSuccess }: Props) {
           selectedAssetType={selectedAssetType}
           onAssetTypeChange={setSelectedAssetType}
         />
-        <Button type="submit">Save Transaction</Button>
+        <UButton.WithVariant ariaLabel="Save transaction" variant="default" type="submit">
+          Save Transaction
+        </UButton.WithVariant>
         <TransactionErrors errors={errors} />
       </form>
     </FormProvider>

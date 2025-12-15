@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import UpdateTransactionForm from "./updateTransactionForm";
 import SideSheet from "../../../ui-elements/common/sideSheet";
 import type { TransactionI } from "@/types/transaction";
 import { Eye } from "lucide-react";
+import { UButton } from "@/components/ui-elements/buttons/UButton";
 
 interface Props {
   transaction: TransactionI;
@@ -16,9 +16,9 @@ function UpdateTransactionSheet({ transaction }: Props) {
     <SideSheet
       title="Update Transaction"
       sheetTrigger={
-        <Button className="my-2 cursor-pointer rounded-full bg-transparent uppercase">
+        <UButton.Ghost ariaLabel="Update transaction">
           <Eye className="h-[32px] w-[32px] text-green-800" />
-        </Button>
+        </UButton.Ghost>
       }
       description={`Transaction #${transaction.id}`}
       content={

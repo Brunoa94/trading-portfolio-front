@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
 import { Form } from "../../input/form";
+import { UButton } from "@/components/ui-elements/buttons/UButton";
 import { useFormContext, type UseFormRegister } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import { AssetsService } from "@/services/assetsService";
@@ -46,7 +46,8 @@ export default function PriceSection({ register, defaultValue, name }: Props) {
         register={register}
         defaultValue={defaultValue}
       />
-      <Button
+      <UButton.WithVariant
+        ariaLabel="Get current price"
         variant="secondary"
         className="ml-auto flex w-fit items-center gap-4 px-2"
         onClick={setCurrentPrice}
@@ -54,7 +55,7 @@ export default function PriceSection({ register, defaultValue, name }: Props) {
       >
         {isPending && symbol && <Spinner />}
         Get Current Price
-      </Button>
+      </UButton.WithVariant>
     </div>
   );
 }

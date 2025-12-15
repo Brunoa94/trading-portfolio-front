@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { UButton } from "@/components/ui-elements/buttons/UButton";
 import {
   DialogClose,
   DialogContent,
@@ -34,9 +34,13 @@ function LoginForm() {
           />
         </div>
         <DialogFooter className="flex flex-col gap-2">
-          <Button type="submit">Login</Button>
+          <UButton.WithVariant ariaLabel="Login" variant="default" type="submit">
+            Login
+          </UButton.WithVariant>
           <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
+            <UButton.WithVariant ariaLabel="Cancel" variant="outline">
+              Cancel
+            </UButton.WithVariant>
           </DialogClose>
         </DialogFooter>
       </form>

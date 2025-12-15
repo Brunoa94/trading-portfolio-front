@@ -1,6 +1,6 @@
 "use server";
 
-import { Button } from "@/components/ui/button";
+import { UButton } from "@/components/ui-elements/buttons/UButton";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { LoginIcon } from "@/assets/icons";
 import React, { Suspense } from "react";
@@ -11,10 +11,14 @@ function Login() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="absolute right-4">
+        <UButton.WithVariant
+          ariaLabel="Open login dialog"
+          variant="outline"
+          className="absolute right-4"
+        >
           <LoginIcon />
           Login
-        </Button>
+        </UButton.WithVariant>
       </DialogTrigger>
       <Suspense>
         <LoginForm />

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { UButton } from "@/components/ui-elements/buttons/UButton";
 import {
   Sheet,
   SheetClose,
@@ -39,7 +39,9 @@ export default function SideSheet({
         <div className="grid flex-1 auto-rows-min gap-6 px-4">{content}</div>
         <SheetFooter className="px-0">
           <SheetClose asChild>
-            <Button variant="outline">Close</Button>
+            <UButton.WithVariant ariaLabel="Close" variant="outline">
+              Close
+            </UButton.WithVariant>
           </SheetClose>
         </SheetFooter>
       </SheetContent>
