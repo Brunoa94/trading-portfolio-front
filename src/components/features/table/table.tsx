@@ -47,7 +47,22 @@ const ListTransactionsWithVariation = ({ children }: PropsWithChildren) => (
   />
 );
 
+const ListLiveAssets = ({ children }: PropsWithChildren) => (
+  <TableSkeleton
+    children={children}
+    headerColumns={[
+      "",
+      "Icon",
+      "Symbol",
+      "Current price",
+      "Change 24h",
+      "% Change 24h",
+    ]}
+  />
+);
+
 export const Table = {
   ListTransactions,
   ListTransactionsWithVariation,
+  ListLiveAssets,
 };

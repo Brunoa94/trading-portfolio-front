@@ -7,7 +7,10 @@ interface Props {
 function UpDownArrow({ value }: Props) {
   if (value > 0) {
     return (
-      <ArrowUp size={"sm"} className="h-6 w-6 shrink-0 text-emerald-400" />
+      <ArrowUp
+        size={"sm"}
+        className="ml-auto h-5 w-5 shrink-0 text-emerald-400"
+      />
     );
   }
 
@@ -15,7 +18,9 @@ function UpDownArrow({ value }: Props) {
     return <></>;
   }
 
-  return <ArrowDown size={"sm"} className="h-6 w-6 shrink-0 text-red-400" />;
+  return (
+    <ArrowDown size={"sm"} className="ml-auto h-5 w-5 shrink-0 text-red-400" />
+  );
 }
 
 export default UpDownArrow;

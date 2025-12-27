@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { socket } from "@/client/socketClient";
 import { LiveAssetsResponseSchema } from "@/schemas/liveAsset";
-import type { LiveAsset } from "@/types/liveAsset";
+import type { LiveAssetT } from "@/types/liveAsset";
 
 export default function useGetLiveAssets() {
   const [isConnected, setIsConnected] = useState(socket.connected);
-  const [liveAssets, setLiveAssets] = useState<LiveAsset[]>([]);
+  const [liveAssets, setLiveAssets] = useState<LiveAssetT[]>([]);
 
   useEffect(() => {
     socket.connect();

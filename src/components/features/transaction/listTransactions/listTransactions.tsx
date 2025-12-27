@@ -5,9 +5,9 @@ import { UserService } from "@/services/usersService";
 import useErrorHandling from "@/hooks/useErrorHandling";
 import Paginator from "@/components/ui-elements/common/paginator/paginator";
 import LoadingState from "@/components/ui-elements/common/graphics/loadingState";
-import { TransactionRow } from "../common/transaction/transactionRow";
 import { Font } from "@/theme/font";
 import { Table, TableContainer } from "../../table/table";
+import { TransactionRow } from "../common/transactionRow";
 interface Props {
   user_id: number;
 }

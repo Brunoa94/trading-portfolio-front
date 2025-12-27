@@ -7,8 +7,7 @@ import { Font } from "@/theme/font";
 import { TableRow } from "@/components/ui/table";
 import type { TransactionWithVariationI } from "@/types/transaction";
 import Paginator from "@/components/ui-elements/common/paginator/paginator";
-import { TransactionRow } from "../common/transaction/transactionRow";
-
+import { TransactionRow } from "../common/transactionRow";
 interface Props {
   user_id: number;
 }

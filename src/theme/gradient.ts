@@ -15,4 +15,10 @@ export const Gradient = {
     "from-slate-300/20 to-slate-400/10 border-slate-400/30 bg-gradient-to-br",
   DiagonalBronze:
     "from-orange-500/20 to-orange-600/10 border-orange-600/30 bg-gradient-to-br",
+  PositiveGradient:
+    "bg-gradient-to-r from-emerald-400 to-emerald-200 bg-clip-text text-transparent",
+  NegativeGradient:
+    "bg-gradient-to-r from-red-400 to-red-200 bg-clip-text text-transparent",
+  NeutralGradient:
+    "bg-gradient-to-r from-gray-400 to-gray-300 bg-clip-text text-transparent",
 };

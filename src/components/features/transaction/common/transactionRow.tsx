@@ -3,10 +3,10 @@ import type {
   TransactionI,
   TransactionWithVariationI,
 } from "@/types/transaction";
-import UpdateTransactionSheet from "../../updateTransaction/updateTransactionSheet";
-import DeleteTransactionButton from "../../deleteTransaction/deleteTransactionButton";
 import type { PropsWithChildren } from "react";
 import VariationBanner from "@/components/ui-elements/common/graphics/variationBanner";
+import UpdateTransactionSheet from "../updateTransaction/updateTransactionSheet";
+import DeleteTransactionButton from "../deleteTransaction/deleteTransactionButton";
 
 interface Props extends PropsWithChildren {
   row: TransactionI;

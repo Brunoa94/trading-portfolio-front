@@ -1,15 +1,10 @@
-import useGetLiveAssets from "@/components/features/live-assets/getLiveAssets/useGetLiveAssets";
+import ListLiveAssets from "@/components/features/market/liveAsset/listLiveAssets";
 import Container from "@/components/layout/container";
-import type { LiveAsset } from "@/types/liveAsset";
 
 function HomepagePage() {
-  const { liveAssets } = useGetLiveAssets();
-
   return (
     <Container>
-      {liveAssets.map((liveAsset: LiveAsset) => (
-        <span>{liveAsset.symbol}</span>
-      ))}
+      <ListLiveAssets />
     </Container>
   );
 }
