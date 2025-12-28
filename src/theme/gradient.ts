@@ -21,4 +21,8 @@ export const Gradient = {
     "bg-gradient-to-r from-red-400 to-red-200 bg-clip-text text-transparent",
   NeutralGradient:
     "bg-gradient-to-r from-gray-400 to-gray-300 bg-clip-text text-transparent",
+  LogoContainer:
+    "bg-gradient-to-br from-accent/20 via-primary/10 to-emerald-500/20",
+  LogoGlow:
+    "bg-gradient-to-br from-accent/10 to-emerald-500/10",
 };

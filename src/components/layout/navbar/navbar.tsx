@@ -1,11 +1,21 @@
-"use server";
+"use client";
 
 import Login from "../../features/auth/loginAuthentication/login";
 import NavbarLink from "./navbarLink";
-import { UButton } from "@/components/ui-elements/buttons/UButton";
+import { useScrollDetection } from "./useScrollDetection";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
-import { LucideBitcoin, MenuIcon } from "lucide-react";
+import { NavbarStyles } from "@/theme/navbar";
+import { Gradient } from "@/theme/gradient";
+import { cn } from "@/lib/utils";
+import {
+  LucideBitcoin,
+  MenuIcon,
+  User,
+  ArrowLeftRight,
+  Globe,
+  TrendingUp,
+} from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 type RoutesT =
@@ -18,24 +28,29 @@ type RoutesT =
 interface LinkI {
   href: RoutesT;
   name: string;
+  icon: React.ComponentType<{ className?: string }>;
 }
 
 const ROUTES: LinkI[] = [
   {
     href: "/profile",
     name: "Profile",
+    icon: User,
   },
   {
     href: "/transactions",
     name: "Transactions",
+    icon: ArrowLeftRight,
   },
   {
     href: "/global",
     name: "Overview",
+    icon: Globe,
   },
   {
     href: "/market",
     name: "Market",
+    icon: TrendingUp,
   },
 ];
 
@@ -46,6 +61,7 @@ function NavLinks() {
         <NavbarLink
           href={route.href}
           name={route.name}
+          icon={route.icon}
           key={`${route.href}-${route.name}`}
         />
       ))}
@@ -57,14 +73,15 @@ function MobileMenu() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <UButton.WithVariant
-          ariaLabel="Open menu"
-          variant="outline"
-          className="absolute left-4"
+        <button
+          aria-label="Open menu"
+          className="group from-accent/10 to-primary/10 border-border/20 hover:from-accent/20 hover:to-primary/20 hover:border-accent/30 hover:shadow-accent/20 focus-visible:ring-accent absolute left-4 flex items-center gap-2 rounded-lg border bg-gradient-to-r px-3 py-2 transition-all duration-300 hover:shadow-lg focus-visible:ring-2 focus-visible:outline-none"
         >
-          <MenuIcon />
-          <span>Menu</span>
-        </UButton.WithVariant>
+          <MenuIcon className="text-primary group-hover:text-accent h-5 w-5 transition-colors duration-200" />
+          <span className="text-primary group-hover:text-accent text-sm font-medium transition-colors duration-200">
+            Menu
+          </span>
+        </button>
       </DialogTrigger>
       <DialogContent
         style={{ transform: "translateY(50%)" }}
@@ -78,8 +95,16 @@ function MobileMenu() {
 }
 
 function Mobile() {
+  const { isScrolled } = useScrollDetection();
+
   return (
-    <nav className="border-primary fixed top-0 left-0 flex h-16 w-full items-center justify-center gap-8 border-b px-4 lg:hidden!">
+    <nav
+      className={cn(
+        NavbarStyles.Base,
+        "justify-center gap-8 lg:hidden!",
+        isScrolled && NavbarStyles.ScrolledBackground
+      )}
+    >
       <MobileMenu />
       <HomepageLink />
       <Login />
@@ -88,8 +113,16 @@ function Mobile() {
 }
 
 function Desktop() {
+  const { isScrolled } = useScrollDetection();
+
   return (
-    <nav className="text-primary relative hidden h-16 w-full items-center gap-8 px-4 text-lg md:justify-center lg:flex!">
+    <nav
+      className={cn(
+        NavbarStyles.Base,
+        "text-primary relative hidden gap-8 text-lg md:justify-center lg:flex!",
+        isScrolled && NavbarStyles.ScrolledBackground
+      )}
+    >
       <HomepageLink />
       <NavLinks />
       <Login />
@@ -98,19 +131,31 @@ function Desktop() {
 }
 
 function HomepageLink() {
+  const { isScrolled } = useScrollDetection();
+
   return (
     <NavLink
       to="/"
-      className="relative flex items-center gap-2 text-xl lg:absolute! lg:left-4"
+      className="focus-visible:ring-accent relative flex items-center gap-3 rounded-lg text-xl transition-all duration-300 focus-visible:ring-2 focus-visible:outline-none lg:absolute! lg:left-4"
     >
-      <div className="bg-card-gradient border-transaparent flex items-center justify-center rounded-md bg-gradient-to-br from-transparent/26 via-purple-900/26 to-green-800 p-2">
-        <LucideBitcoin
-          height={32}
-          width={32}
-          className="fill-primary stroke-primary"
-        />
+      <div
+        className={`relative flex items-center justify-center rounded-xl border p-3 transition-all duration-300 ${
+          isScrolled
+            ? `${Gradient.LogoContainer} border-accent/30 shadow-lg shadow-accent/20`
+            : 'bg-transparent border-border/20'
+        }`}
+      >
+        <div className="relative">
+          <LucideBitcoin
+            height={28}
+            width={28}
+            className="fill-primary stroke-primary drop-shadow-sm transition-all duration-300"
+          />
+        </div>
       </div>
-      <h1 className="text-primary">Capital Lens</h1>
+      <h1 className="text-primary font-semibold tracking-tight transition-all duration-300">
+        Capital Lens
+      </h1>
     </NavLink>
   );
 }

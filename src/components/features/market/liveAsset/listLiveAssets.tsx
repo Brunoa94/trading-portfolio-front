@@ -13,7 +13,7 @@ export default function ListLiveAssets() {
   const [page, setPage] = useState<number>(0);
 
   return (
-    <section className="flex w-full flex-col gap-2">
+    <section className="flex w-full flex-col gap-6">
       <Table.ListLiveAssets>
         {liveAssets
           ?.slice(page * ITEMS_PER_PAGE, (page + 1) * ITEMS_PER_PAGE)

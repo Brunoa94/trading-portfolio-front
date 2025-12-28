@@ -10,21 +10,32 @@ export const TableContainer = ({ children }: PropsWithChildren) => {
   );
 };
 
+export const NoBorderTableContainer = ({ children }: PropsWithChildren) => {
+  return <div className="lex w-full flex-col gap-2 rounded-md">{children}</div>;
+};
+
 interface TableSkeletonProps extends PropsWithChildren {
   headerColumns: string[];
+  noBorder?: boolean;
 }
 
 export const TableSkeleton = ({
   children,
   headerColumns,
-}: TableSkeletonProps) => (
-  <TableContainer>
+  noBorder,
+}: TableSkeletonProps) => {
+  const Content = (
     <TableC>
       <TableHeader columns={headerColumns} />
       <TableBody>{children}</TableBody>
     </TableC>
-  </TableContainer>
-);
+  );
+
+  if (noBorder)
+    return <NoBorderTableContainer>{Content}</NoBorderTableContainer>;
+
+  return <TableContainer>{Content}</TableContainer>;
+};
 
 const ListTransactions = ({ children }: PropsWithChildren) => (
   <TableSkeleton
@@ -39,7 +50,7 @@ const ListTransactionsWithVariation = ({ children }: PropsWithChildren) => (
     headerColumns={[
       "",
       "Amount",
-      "Invested Amount",
+      "Price Bought",
       "Symbol",
       "Current Price",
       "Date",
@@ -50,6 +61,7 @@ const ListTransactionsWithVariation = ({ children }: PropsWithChildren) => (
 const ListLiveAssets = ({ children }: PropsWithChildren) => (
   <TableSkeleton
     children={children}
+    noBorder
     headerColumns={[
       "",
       "Icon",
