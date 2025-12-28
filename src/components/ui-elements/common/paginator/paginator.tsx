@@ -20,7 +20,7 @@ function Paginator({ totalItems, onClick, itemsPerPage }: Props) {
   } = usePaginator({ totalItems, itemsPerPage, onClick });
 
   return (
-    <Pagination className="flex w-full items-center px-2 md:px-6">
+    <Pagination className="mt-4 flex w-full items-center px-2 md:px-6">
       <UButton.WithVariant
         ariaLabel="Previous page"
         variant="default"

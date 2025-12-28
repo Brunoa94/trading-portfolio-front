@@ -40,7 +40,7 @@ export const TableSkeleton = ({
 const ListTransactions = ({ children }: PropsWithChildren) => (
   <TableSkeleton
     children={children}
-    headerColumns={["ID", "Title", "Amount", "Price Targeted", "Symbol"]}
+    headerColumns={["ID", "Symbol", "Amount", "Price Targeted", "Title", "Update", "Delete"]}
   />
 );
 

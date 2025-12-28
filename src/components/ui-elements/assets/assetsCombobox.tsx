@@ -25,17 +25,30 @@ export default function AssetsCombobox({
   setValue,
   defaultValue,
 }: Props) {
-  const { data: comboOptions } = useQuery({
+  const { data: assets } = useQuery({
     queryKey: ["assets", assetType],
     queryFn: () => AssetsService.getAssets(),
-    select: (assets: AssetT[]): ComboOptionT[] => AssetsToOptions(assets),
   });
+
+  const comboOptions = assets ? AssetsToOptions(assets) : [];
+
+  const handleSetValue = (name: string, value: string) => {
+    setValue(name, value);
+
+    // Also set the asset_icon when symbol is selected
+    if (name === "symbol" && assets) {
+      const selectedAsset = assets.find(asset => asset.symbol === value);
+      if (selectedAsset) {
+        setValue("asset_icon", selectedAsset.icon);
+      }
+    }
+  };
 
   return (
     <QueryClientProvider client={queryClient}>
       <Combobox
         name="symbol"
-        setValue={setValue}
+        setValue={handleSetValue}
         options={comboOptions}
         placeholder="Select your stock"
         defaultValue={defaultValue}

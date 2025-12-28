@@ -10,6 +10,7 @@ export const TransactionSchema = z.object({
   price_targeted: z.number().positive(),
   user_id: z.number().int().positive(),
   symbol: z.string(),
+  asset_icon: z.string().nullable().optional(),
 });
 
 export const CreateTransactionSchema = TransactionSchema.omit({
