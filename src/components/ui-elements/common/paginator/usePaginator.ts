@@ -8,20 +8,20 @@ interface Props {
 
 function usePaginator({ totalItems, itemsPerPage, onClick }: Props) {
   const maxPages = Math.ceil(totalItems / itemsPerPage) - 1;
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const prevDisabled = currentPage === 1;
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const prevDisabled = currentPage === 0;
   const nextDisabled = currentPage === maxPages;
   const [intermediatePages, setIntermediatePages] = useState<number[]>([]);
 
   const getCurrentPageGroup = () => {
     const maxVisiblePages = 4;
     let minPageLimit =
-      Math.floor((currentPage - 1) / maxVisiblePages) * maxVisiblePages + 1;
+      Math.floor(currentPage / maxVisiblePages) * maxVisiblePages;
 
     let maxPageLimit = minPageLimit + maxVisiblePages - 1;
 
-    if (maxPageLimit > maxPages) {
-      maxPageLimit = maxPages;
+    if (maxPageLimit >= maxPages) {
+      maxPageLimit = maxPages - 1;
     }
 
     const currentPageGroup = [];
@@ -39,7 +39,6 @@ function usePaginator({ totalItems, itemsPerPage, onClick }: Props) {
   }, [currentPage]);
 
   const goNextPage = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("Clicking next");
     e.preventDefault();
 
     if (currentPage >= maxPages) return;
@@ -48,9 +47,9 @@ function usePaginator({ totalItems, itemsPerPage, onClick }: Props) {
   };
 
   const goPrevPage = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log("Clicking next");
     e.preventDefault();
-    if (currentPage === 1) return;
+
+    if (currentPage === 0) return;
     onClick(currentPage - 1);
     setCurrentPage((prev) => prev - 1);
   };

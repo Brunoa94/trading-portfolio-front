@@ -21,15 +21,26 @@ export const UpdateTransactionSchema = TransactionSchema.partial();
 export const TransactionWithVariationSchema = TransactionSchema.extend({
   variation: z.object({
     difference_value: z.number(),
-    difference_percentage: z.number()
+    difference_percentage: z.number(),
   }),
-  created_at: z.string()
+  created_at: z.string(),
 }).transform((data) => ({
   ...data,
-  created_at: formatDate(data.created_at)
+  created_at: formatDate(data.created_at),
 }));
 
 export const PaginatedTransactions = z.object({
   items: z.array(TransactionSchema),
-  totalCount: z.number(),
+  total: z.number(),
+  page: z.number(),
+  size: z.number(),
+  pages: z.number(),
+});
+
+export const PaginatedTransactionsWithVariation = z.object({
+  items: z.array(TransactionWithVariationSchema),
+  total: z.number(),
+  page: z.number(),
+  size: z.number(),
+  pages: z.number(),
 });

@@ -8,13 +8,16 @@ import LoadingState from "@/components/ui-elements/common/graphics/loadingState"
 import { Font } from "@/theme/font";
 import { Table, TableContainer } from "../../table/table";
 import { TransactionRow } from "../common/transactionRow";
+import useListWithPaginator from "@/hooks/useListWithPaginator";
+
+const ITEMS_PER_PAGE = 4;
 interface Props {
   user_id: number;
 }
 
 export default function ListTransactions({ user_id }: Props) {
   const {
-    data: userTransactionsList = [],
+    data: userTransactions,
     isPending,
     error,
   } = useQuery({
@@ -22,6 +25,10 @@ export default function ListTransactions({ user_id }: Props) {
     queryFn: async () => await UserService.getUserTransactions({ user_id }),
   });
   const triggerError = useErrorHandling({ error });
+  const { slicedList, setPage } = useListWithPaginator<TransactionI>({
+    itemsPerPage: ITEMS_PER_PAGE,
+    list: userTransactions?.items ?? [],
+  });
 
   if (error) {
     triggerError();
@@ -47,13 +54,17 @@ export default function ListTransactions({ user_id }: Props) {
     <section className="flex w-full flex-col gap-2">
       <h3 className={`${Font.TableTitle}`}>List of your transactions</h3>
       <Table.ListTransactions>
-        {userTransactionsList?.map((transaction: TransactionI) => (
+        {slicedList.map((transaction: TransactionI) => (
           <TableRow key={`id-${transaction.id}`}>
             <TransactionRow.WithIdTitleActions row={transaction} />
           </TableRow>
         ))}
       </Table.ListTransactions>
-      <Paginator />
+      <Paginator
+        onClick={setPage}
+        totalItems={userTransactions.total}
+        itemsPerPage={ITEMS_PER_PAGE}
+      />
     </section>
   );
 }

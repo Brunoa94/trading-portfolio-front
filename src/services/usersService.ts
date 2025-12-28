@@ -7,6 +7,7 @@ import { UserOverviewSchema, type UserOverviewI } from "@/schemas/user";
 import z from "zod";
 import {
   PaginatedTransactions,
+  PaginatedTransactionsWithVariation,
   TransactionSchema,
   TransactionWithVariationSchema,
 } from "@/schemas/transaction";
@@ -27,7 +28,9 @@ export class UserService {
     user_id,
     page = 1,
     limit = 10,
-  }: GetUserTransactionsProps): Promise<TransactionWithVariationI[]> {
+  }: GetUserTransactionsProps): Promise<
+    ItemsWithPaginator<TransactionWithVariationI>
+  > {
     try {
       const params = new URLSearchParams({
         page: page.toString(),
@@ -38,7 +41,7 @@ export class UserService {
         `/users/${user_id}/transactions/variation`
       );
 
-      return z.array(TransactionWithVariationSchema).parse(response.items);
+      return PaginatedTransactionsWithVariation.parse(response);
     } catch (e) {
       if (e instanceof z.ZodError) {
         console.log(e);
@@ -55,7 +58,7 @@ export class UserService {
     user_id,
     page = 1,
     limit = 10,
-  }: GetUserTransactionsProps): Promise<TransactionI[]> {
+  }: GetUserTransactionsProps): Promise<ItemsWithPaginator<TransactionI>> {
     try {
       const params = new URLSearchParams({
         page: page.toString(),
@@ -66,7 +69,7 @@ export class UserService {
         `/users/${user_id}/transactions`
       );
 
-      return z.array(TransactionSchema).parse(response.items);
+      return PaginatedTransactions.parse(response);
     } catch (e) {
       if (e instanceof z.ZodError) {
         console.log(e);

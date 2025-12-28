@@ -8,13 +8,16 @@ import { TableRow } from "@/components/ui/table";
 import type { TransactionWithVariationI } from "@/types/transaction";
 import Paginator from "@/components/ui-elements/common/paginator/paginator";
 import { TransactionRow } from "../common/transactionRow";
+import useListWithPaginator from "@/hooks/useListWithPaginator";
+
+const ITEMS_PER_PAGE = 5;
 interface Props {
   user_id: number;
 }
 
 function ListTransactionsWithVariation({ user_id }: Props) {
   const {
-    data: userTransactionsList = [],
+    data: userTransactions,
     isPending,
     error,
   } = useQuery({
@@ -23,6 +26,11 @@ function ListTransactionsWithVariation({ user_id }: Props) {
       await UserService.getUserTransactionsWithVariation({ user_id }),
   });
   const triggerError = useErrorHandling({ error });
+  const { slicedList, setPage } =
+    useListWithPaginator<TransactionWithVariationI>({
+      itemsPerPage: ITEMS_PER_PAGE,
+      list: userTransactions?.items ?? [],
+    });
 
   if (error) {
     triggerError();
@@ -48,13 +56,17 @@ function ListTransactionsWithVariation({ user_id }: Props) {
     <section className="flex w-full flex-col gap-2">
       <h3 className={`${Font.TableTitle}`}>List of your transactions</h3>
       <Table.ListTransactionsWithVariation>
-        {userTransactionsList?.map((transaction: TransactionWithVariationI) => (
+        {slicedList?.map((transaction: TransactionWithVariationI) => (
           <TableRow key={`id-${transaction.id}`}>
             <TransactionRow.WithVariationLabels row={transaction} />
           </TableRow>
         ))}
       </Table.ListTransactionsWithVariation>
-      <Paginator />
+      <Paginator
+        totalItems={userTransactions.total}
+        onClick={setPage}
+        itemsPerPage={ITEMS_PER_PAGE}
+      />
     </section>
   );
 }

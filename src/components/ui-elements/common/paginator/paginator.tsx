@@ -33,11 +33,11 @@ function Paginator({ totalItems, onClick, itemsPerPage }: Props) {
       <div className="flex items-center gap-2">
         <div className="flex items-center gap-2">
           <span className="text-sm">Page</span>
-          <span className="text-md font-bold">{currentPage}</span>
+          <span className="text-md font-bold">{currentPage + 1}</span>
         </div>
         <div className="flex items-center gap-2">
           <span className="text-sm">of</span>
-          <span className="text-md font-bold">{maxPages}</span>
+          <span className="text-md font-bold">{maxPages + 1}</span>
         </div>
       </div>
       <UButton.WithVariant
