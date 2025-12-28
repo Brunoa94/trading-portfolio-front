@@ -8,8 +8,8 @@ interface RouteConfig {
 
 const routeConfig: Record<string, RouteConfig> = {
   "/": {
-    title: "Dashboard",
-    description: "Overview of your trading portfolio performance",
+    title: "Live Market Data",
+    description: "Overview the market with live updates",
   },
   "/profile": {
     title: "Profile",

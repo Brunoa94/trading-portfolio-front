@@ -3,16 +3,21 @@ import usePaginator from "./usePaginator";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { UButton } from "@/components/ui-elements/buttons/UButton";
 
-function Paginator() {
+interface Props {
+  onClick: (page: number) => void;
+  totalItems: number;
+  itemsPerPage: number;
+}
+
+function Paginator({ totalItems, onClick, itemsPerPage }: Props) {
   const {
     currentPage,
     prevDisabled,
     nextDisabled,
     goNextPage,
     goPrevPage,
-
     maxPages,
-  } = usePaginator({ totalItems: 25, itemsPerPage: 5 });
+  } = usePaginator({ totalItems, itemsPerPage, onClick });
 
   return (
     <Pagination className="flex w-full items-center px-2 md:px-6">

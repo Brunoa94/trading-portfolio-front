@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 interface Props {
   totalItems: number;
   itemsPerPage: number;
+  onClick: (page: number) => void;
 }
 
-function usePaginator({ totalItems, itemsPerPage }: Props) {
-  const maxPages = Math.ceil(totalItems / itemsPerPage);
+function usePaginator({ totalItems, itemsPerPage, onClick }: Props) {
+  const maxPages = Math.ceil(totalItems / itemsPerPage) - 1;
   const [currentPage, setCurrentPage] = useState<number>(1);
   const prevDisabled = currentPage === 1;
   const nextDisabled = currentPage === maxPages;
@@ -42,6 +43,7 @@ function usePaginator({ totalItems, itemsPerPage }: Props) {
     e.preventDefault();
 
     if (currentPage >= maxPages) return;
+    onClick(currentPage + 1);
     setCurrentPage((prev) => prev + 1);
   };
 
@@ -49,6 +51,7 @@ function usePaginator({ totalItems, itemsPerPage }: Props) {
     console.log("Clicking next");
     e.preventDefault();
     if (currentPage === 1) return;
+    onClick(currentPage - 1);
     setCurrentPage((prev) => prev - 1);
   };
 

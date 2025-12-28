@@ -13,6 +13,7 @@ import {
   PortfolioVariationCard,
   PortofolioVariations,
 } from "./portfolioVariationCards";
+import { Gradient } from "@/theme/gradient";
 
 interface Props {
   user_id: number;
@@ -45,7 +46,9 @@ export default function GetUserPortfolioVariation({ user_id }: Props) {
   }
 
   return (
-    <section className="flex flex-col gap-3">
+    <section
+      className={`flex flex-col gap-3 p-8 ${Gradient.GrayCard} rounded-lg`}
+    >
       <h3 className={`${Font.TableTitle}`}>Variation Portolio</h3>
       <OptionsTab<GrowthPeriodKeysT>
         options={PortofolioVariations}

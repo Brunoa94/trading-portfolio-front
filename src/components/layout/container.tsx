@@ -5,15 +5,16 @@ import clsx from "clsx";
 
 interface Props extends PropsWithChildren {
   transparentBg?: boolean;
+  className?: string;
 }
 
-function Container({ children, transparentBg }: Props) {
+function Container({ children, transparentBg, className }: Props) {
   return (
     <main
       className={clsx(
-        `${ContainerS.MainContainer} flex flex-col gap-4 rounded-lg`,
+        `${ContainerS.MainContainer} flex flex-col gap-4 rounded-lg ${className} mb-8 pb-8`,
         transparentBg
-          ? "bg-transparent"
+          ? "bg-transparent !p-0"
           : `${Gradient.GrayCard} border-secondary border`
       )}
     >

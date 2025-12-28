@@ -3,6 +3,7 @@ import { Trophy } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { UserOverviewService } from "@/services/userOverviewService";
 import useErrorHandling from "@/hooks/useErrorHandling";
+import { Font } from "@/theme/font";
 
 interface Props {
   user_id: number;
@@ -29,8 +30,7 @@ function TopPerformersHeader({ user_id }: Props) {
   return (
     <section className="mt-4 flex flex-col gap-4">
       <div className="flex items-center gap-2">
-        <Trophy color="var(--dark-purple)" />
-        <h3>Top Performers</h3>
+        <h3 className={`${Font.TableTitle}`}>Top Performers</h3>
       </div>
       <div className="grid w-full grid-cols-3 gap-4">
         {userTopPerformers.slice(0, 3).map((performer, index) => (

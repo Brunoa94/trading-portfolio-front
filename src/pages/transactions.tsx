@@ -7,11 +7,11 @@ import GetTopSymbols from "@/components/features/overview/getTopSymbols/getTopSy
 function TransactionsPage() {
   return (
     <>
-      <Container transparentBg>
+      <Container transparentBg className="gap-12">
+        <StatisticsOverview user_id={6} />
         <GetTopSymbols />
       </Container>
       <Container>
-        <StatisticsOverview user_id={6} />
         <div className="mt-2 flex w-full items-center justify-end">
           <TransactionSheet />
         </div>
