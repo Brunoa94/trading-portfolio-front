@@ -4,11 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 import { UserService } from "@/services/usersService";
 import useErrorHandling from "@/hooks/useErrorHandling";
 import Paginator from "@/components/ui-elements/common/paginator/paginator";
-import LoadingState from "@/components/ui-elements/common/graphics/loadingState";
 import { Font } from "@/theme/font";
 import { Table, TableContainer } from "../../table/table";
 import { TransactionRow } from "../common/transactionRow";
 import useListWithPaginator from "@/hooks/useListWithPaginator";
+import ListTransactionsShimmer from "./listTransactionsShimmer";
 
 const ITEMS_PER_PAGE = 4;
 interface Props {
@@ -43,11 +43,7 @@ export default function ListTransactions({ user_id }: Props) {
   }
 
   if (isPending) {
-    return (
-      <TableContainer>
-        <LoadingState />
-      </TableContainer>
-    );
+    return <ListTransactionsShimmer itemsPerPage={ITEMS_PER_PAGE} />;
   }
 
   return (

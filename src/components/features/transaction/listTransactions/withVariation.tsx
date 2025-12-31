@@ -2,12 +2,12 @@ import useErrorHandling from "@/hooks/useErrorHandling";
 import { UserService } from "@/services/usersService";
 import { useQuery } from "@tanstack/react-query";
 import { Table, TableContainer } from "../../table/table";
-import LoadingState from "@/components/ui-elements/common/graphics/loadingState";
 import { Font } from "@/theme/font";
 import { TableRow } from "@/components/ui/table";
 import type { TransactionWithVariationI } from "@/types/transaction";
 import Paginator from "@/components/ui-elements/common/paginator/paginator";
 import { TransactionRow } from "../common/transactionRow";
+import { TransactionRowShimmer } from "../common/transactionRowShimmer";
 import useListWithPaginator from "@/hooks/useListWithPaginator";
 
 const ITEMS_PER_PAGE = 5;
@@ -46,9 +46,16 @@ function ListTransactionsWithVariation({ user_id }: Props) {
 
   if (isPending) {
     return (
-      <TableContainer>
-        <LoadingState />
-      </TableContainer>
+      <section className="flex w-full flex-col gap-2">
+        <h3 className={`${Font.TableTitle}`}>List of your transactions</h3>
+        <Table.ListTransactionsWithVariation>
+          {Array.from({ length: ITEMS_PER_PAGE }, (_, index) => (
+            <TableRow key={`shimmer-${index}`}>
+              <TransactionRowShimmer.WithVariationLabels />
+            </TableRow>
+          ))}
+        </Table.ListTransactionsWithVariation>
+      </section>
     );
   }
 
